@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全局API：Vue.extend</title>
+    <script src="./js/vue-2.7.14.js"></script>
+</head>
+
+<body>
+    <div id="app1">app1:{{title}}</div>
+    <div id="app2">app2:{{title}}</div>
+    <script>
+        var Vue2 = Vue.extend({
+            data() {
+                return {
+                    title: 'hello'
+                }
+            }
+        })
+
+        var vm1 = new Vue({ el: "#app1" })
+        var vm2 = new Vue2({ el: "#app2" })
+    </script>
+</body>
+
+</html>
