@@ -2,6 +2,8 @@
   <li>
     <label>
       <input type="checkbox" :checked="todo.done" @click="handleCheck(todo.id)"/>
+      <!-- 如下代码也能实现功能，但是不太推荐，因为有点违反了原则，因为修改了props。 -->
+      <!-- <input type="checkbox" v-model="todo.done"/> -->
       <span>{{todo.title}}</span>
     </label>
     <button class="btn btn-danger" style="display: none">删除</button>
@@ -12,14 +14,14 @@
 export default {
   name: "MyItem",
   //声明接收todo对象
-  props:['todo','checkTodo'],
+  props:['todo'],
   mounted(){
     console.log(this.todo)
   },
   methods:{
     handleCheck(id){
       // console.log(id)
-      this.checkTodo(id)
+      // this.checkTodo(id)
     }
   }
 };
