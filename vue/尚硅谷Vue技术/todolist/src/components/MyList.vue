@@ -5,6 +5,7 @@
       :key="todoObj.id"
       :todo="todoObj"
       :checkTodo="checkTodo"
+      :deleteTodo="deleteTodo"
     />
   </ul>
 </template>
@@ -17,7 +18,10 @@ export default {
   components: {
     MyItem,
   },
-  props: ["todos", "checkTodo"],
+  props: ["todos", "checkTodo", "deleteTodo"],
+  mounted(){
+    // console.log("MyList mounted",this)
+  }
 };
 </script>
 

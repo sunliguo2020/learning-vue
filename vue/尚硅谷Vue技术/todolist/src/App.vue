@@ -3,14 +3,14 @@
     <div class="todo-container">
       <div class="todo-wrap">
         <MyHeader :addTodo="addTodo"></MyHeader>
-        <MyList :todos="todos" :checkTodo="checkTodo" ></MyList>
-        <MyFooter></MyFooter>
+        <MyList :todos="todos" :checkTodo="checkTodo" :deleteTodo="deleteTodo"></MyList>
+        <MyFooter :todos="todos"></MyFooter>
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script scoped>
 import MyFooter from "./components/MyFooter.vue";
 import MyHeader from "./components/MyHeader.vue";
 import MyList from "./components/MyList.vue";
@@ -37,13 +37,24 @@ export default {
       // console.log('我是App组件，我收到了数据',x)
       this.todos.unshift(todoObj)
     },
-    //勾选或者取消勾选一个todo
+     //勾选或者取消勾选一个todo
     checkTodo(id){
       this.todos.forEach((todo)=>{
         //函数体
         if(todo.id === id) todo.done = !todo.done
       })
+    },
+    //删除一个todo
+    deleteTodo(id){
+      console.log("deletetod",id)
+      this.todos=this.todos.filter((todo)=>{
+        return todo.id !== id
+      })
     }
+
+  },
+  mounted(){
+    // console.log("App mounted",this)
   }
 };
 </script>
