@@ -11,7 +11,7 @@
 <body>
     <!-- 定义唯一根元素div -->
     <div id="app">
-        <p>总价格{{totalPrice}}</p>
+        <p>总价格:{{totalPrice}}</p>
         <p>单价：{{price}}</p>
         <p>数量：{{num}}</p>
         <div>
@@ -26,21 +26,26 @@
                 price: 12,
                 num: 0,
             },
-            methods: {
-                //定义事件处理方法showInfo
-                showInfo() {
-                    this.msg = '触发单击事件';
-                }
-
-            },
             computed: {
-                totalPrice() {
-                    return this.price * this.num;
+                //简写形式
+                // totalPrice() {
+                //     return this.price * this.num;
+                // }
+                //2 .全写
+                totalPrice: {
+                    //读取属性值时，执行
+                    get() {
+                        console.log("有人要读取totalPrice属性值！")
+                        return this.price * this.num
+                    },
+                    set() {
+
+                    }
                 }
             }
         });
-        console.log(vm.$data.name)
-        console.log(vm.name)
+        console.log(vm.$data.num)
+        console.log(vm.num)
     </script>
 </body>
 

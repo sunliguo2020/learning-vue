@@ -11,7 +11,8 @@
 <body>
     <!-- 定义唯一根元素div -->
     <div id="app">
-        <input type="text" v-model="cityName">
+        <!-- input中的v-model用于在表单控件元素上创建双向数据绑定 -->
+        <input type="text" v-model.lazy="cityName">
     </div>
     <script>
         var vm = new Vue({
@@ -19,23 +20,23 @@
             data: {
                 cityName: "shanghai"
             },
-            methods: {
-                //定义事件处理方法showInfo
-                showInfo() {
-                    this.msg = '触发单击事件';
-                }
-
-            },
-            computed: {
-
-            },
             watch: {
+                //1、简写形式
                 //使用watch监听cityName的变化
-                cityName(newvalue, oldvalue) {
-                    // alert(newvalue);
-                    console.log(oldvalue);
-                    console.log(newvalue)
+                // cityName(newvalue, oldvalue) {
+                //     // alert(newvalue);
+                //     console.log(oldvalue);
+                //     console.log(newvalue)
+                // }
+                //2、正常写法
+                cityName:{
+                    //当值被改变时被调用
+                    handler(newValue,oldvalue){
+                        console.log("有人修改了cityName的值")
+                        console.log(oldvalue);
+                    }
                 }
+
             }
         });
 
