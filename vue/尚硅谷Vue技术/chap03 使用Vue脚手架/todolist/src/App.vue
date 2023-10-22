@@ -32,11 +32,7 @@ export default {
   },
   data() {
     return {
-      todos: [
-        { id: "001", title: "吃饭", done: true },
-        { id: "002", title: "喝酒", done: true },
-        { id: "003", title: "开车", done: false },
-      ],
+      todos:JSON.parse(window.localStorage.getItem('todos'))||[],
     };
   },
   methods: {
@@ -74,6 +70,20 @@ export default {
   },
   mounted() {
     // console.log("App mounted",this)
+  },
+  watch: {
+    //简写，无法深度监视
+    // todos(value) {
+    //   console.log("我要存", value);
+    //   localStorage.setItem('todos',JSON.stringify(value));
+    // },
+    todos:{
+      deep:true,
+      handler(value){
+        console.log("检测到数据变化，我要存", value);
+        localStorage.setItem('todos',JSON.stringify(value));
+      }
+    }
   },
 };
 </script>
