@@ -5,8 +5,6 @@
         <MyHeader @addTodo="addTodo"></MyHeader>
         <MyList
           :todos="todos"
-          :checkTodo="checkTodo"
-          :deleteTodo="deleteTodo"
         ></MyList>
         <MyFooter
           :todos="todos"
@@ -45,7 +43,10 @@ export default {
     checkTodo(id) {
       this.todos.forEach((todo) => {
         //函数体
-        if (todo.id === id) todo.done = !todo.done;
+        if (todo.id === id) {
+          console.log('勾选或者取消勾选',id)
+          todo.done = !todo.done;
+        }
       });
     },
     //删除一个todo
@@ -70,6 +71,13 @@ export default {
   },
   mounted() {
     // console.log("App mounted",this)
+    this.$bus.$on('checkTodo',this.checkTodo)
+    this.$bus.$on('deleteTodo',this.deleteTodo)
+  },
+  beforeDestory(){
+    this.$bus.$off('checkTodo')
+    this.$bus.$off('deleteTodo')
+
   },
   watch: {
     //简写，无法深度监视

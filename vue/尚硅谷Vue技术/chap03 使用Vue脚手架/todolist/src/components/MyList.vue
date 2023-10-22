@@ -4,8 +4,6 @@
       v-for="todoObj of todos"
       :key="todoObj.id"
       :todo="todoObj"
-      :checkTodo="checkTodo"
-      :deleteTodo="deleteTodo"
     />
   </ul>
 </template>
@@ -18,7 +16,7 @@ export default {
   components: {
     MyItem,
   },
-  props: ["todos", "checkTodo", "deleteTodo"],
+  props: ["todos"],
   mounted(){
     // console.log("MyList mounted",this)
   }

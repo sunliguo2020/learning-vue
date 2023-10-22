@@ -18,15 +18,17 @@
 export default {
   name: "MyItem",
   //声明接收todo对象
-  props: ["todo", "checkTodo", "deleteTodo"],
+  props: ["todo", ],
   mounted() {
     // console.log(this.todo);
   },
   methods: {
     //勾选或者取消勾选
     handleCheck(id) {
-      // console.log(id)
-      this.checkTodo(id);
+      console.log('item组件勾选或者取消勾选',id)
+      // this.checkTodo(id);
+      console.log(this.$bus.$emit('checkTodo'))
+      this.$bus.$emit('checkTodo',id)
     },
     //删除一个todo
     handleDelete(id) {
@@ -34,7 +36,8 @@ export default {
         // alert(id)
         // this.deleteTodo(id);
         // console.log(this)
-        this.deleteTodo(id);
+        // this.deleteTodo(id);
+        this.$bus.$emit('deleteTodo',id)
       }
     },
   },
