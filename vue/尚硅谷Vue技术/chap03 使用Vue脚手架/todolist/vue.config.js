@@ -5,5 +5,9 @@ module.exports = {
           entry:'src/main.js'
       }
   },
-  lintOnSave:false,
+  lintOnSave:false, //关闭语法检查
+  //开启代理服务器
+  devServer:{
+    proxy:'http://localhost:4000'
+  }
 }
