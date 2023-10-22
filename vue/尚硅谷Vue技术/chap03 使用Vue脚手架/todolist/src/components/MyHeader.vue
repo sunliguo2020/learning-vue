@@ -22,11 +22,13 @@ export default {
       }
       // console.log(todoObj)
       //通知App去添加一个对象
-      this.addTodo(todoObj)
+      // this.addTodo(todoObj)
+      // 通过自定义事件
+      this.$emit('addTodo',todoObj)
       e.target.value=''
     }
   },
-  props:["addTodo"]
+  props:[]
 };
 </script>
 

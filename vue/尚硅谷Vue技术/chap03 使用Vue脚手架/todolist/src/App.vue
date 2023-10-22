@@ -2,7 +2,7 @@
   <div id="app">
     <div class="todo-container">
       <div class="todo-wrap">
-        <MyHeader :addTodo="addTodo"></MyHeader>
+        <MyHeader @addTodo="addTodo"></MyHeader>
         <MyList
           :todos="todos"
           :checkTodo="checkTodo"
@@ -10,8 +10,8 @@
         ></MyList>
         <MyFooter
           :todos="todos"
-          :checkAllTodo="checkAllTodo"
-          :clearAllTodo="clearAllTodo"
+          @checkAllTodo="checkAllTodo"
+          @clearAllTodo="clearAllTodo"
         ></MyFooter>
       </div>
     </div>
@@ -32,7 +32,7 @@ export default {
   },
   data() {
     return {
-      todos:JSON.parse(window.localStorage.getItem('todos'))||[],
+      todos: JSON.parse(window.localStorage.getItem("todos")) || [],
     };
   },
   methods: {
@@ -77,13 +77,13 @@ export default {
     //   console.log("我要存", value);
     //   localStorage.setItem('todos',JSON.stringify(value));
     // },
-    todos:{
-      deep:true,
-      handler(value){
+    todos: {
+      deep: true,
+      handler(value) {
         console.log("检测到数据变化，我要存", value);
-        localStorage.setItem('todos',JSON.stringify(value));
-      }
-    }
+        localStorage.setItem("todos", JSON.stringify(value));
+      },
+    },
   },
 };
 </script>

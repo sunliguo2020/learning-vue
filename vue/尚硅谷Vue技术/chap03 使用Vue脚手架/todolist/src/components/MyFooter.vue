@@ -13,7 +13,7 @@
 <script>
 export default {
   name: "MyFooter",
-  props: ["todos", "clearAllTodo", "checkAllTodo"],
+  props: ["todos"],
   mounted() {
     // console.log(this.props);
   },
@@ -30,13 +30,19 @@ export default {
       },
       set(value) {
         // console.log('set',value)
-        this.checkAllTodo(value);
+        // this.checkAllTodo(value);
+      
+        //通过自定义事件
+        this.$emit('checkAllTodo',value)
       },
     },
   },
   methods: {
     clearAll() {
-      this.clearAllTodo();
+      // this.clearAllTodo();
+
+      //自定义事件
+      this.$emit('clearAllTodo')
     },
   },
 };
