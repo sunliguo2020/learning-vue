@@ -2,7 +2,8 @@
   <div class="category">
     <h3>{{ title }}分类</h3>
     <!-- 定义一个插槽（挖个坑），等着组件的使用者进行填充 -->
-    <slot>我是默认值，当使用者没有传递具体结构时，我会出现。</slot>
+    <slot name="center">我是默认值，当使用者没有传递具体结构时，我会出现。</slot>
+    <slot name="footer">我是默认值，当使用者没有传递具体结构时，我会出现。</slot>
   
   </div>
 </template>
@@ -19,10 +20,12 @@ props:['listData','title'],
     background-color: skyblue;
     width: 200px;
     height: 300px;
-
 }
 h3{
     text-align: center;
     background-color: orange;
+}
+img{
+    width: 100%;
 }
 </style>
