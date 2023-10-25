@@ -2,8 +2,8 @@
 import VueRouter from 'vue-router'
 
 //引入组件
-import About from '../components/About'
-import  Home from '../components/Home'
+import About from '../pages/About'
+import  Home from '../pages/Home'
 
 //创建一个路由器
 const router = new VueRouter({
