@@ -1,10 +1,11 @@
 <template>
   <div>
-    <h1>当前求和为：{{ sum }}</h1>
+    <h1>当前求和为：{{ $store.state.sum }}</h1>
     <!-- <select name="" id="" v-model.number="n"> -->
     <select name="" id="" v-model="n">
       <option :value="1">1</option>
-      <option :value="2">2</option>:
+      <option :value="2">2</option>
+      :
       <option :value="3">3</option>
     </select>
     <button @click="increment">+</button>
@@ -20,28 +21,28 @@ export default {
   data() {
     return {
       n: 1, //当前用户选择的数字
-      sum: 0, //当前的和
     };
   },
   methods: {
     increment() {
-      this.sum += this.n;
+      this.$store.dispatch("jia", this.n);
     },
     decrement() {
-      this.sum -= this.n;
+      this.$store.dispatch("jian", this.n);
     },
     incrementOdd() {
-      if (this.sum % 2){
-        this.sum += this.n;
+      if (this.$store.state.sum % 2) {
+        this.$store.dispatch("jia", this.n);
       }
-      
     },
     increamentWait() {
-      setTimeout(()=>{
-        this.sum = this.sum + this.n;
-      },500)
-      
+      setTimeout(() => {
+        this.$store.dispatch("jia", this.n);
+      }, 500);
     },
+  },
+  mounted() {
+    console.log(this);
   },
 };
 </script>
