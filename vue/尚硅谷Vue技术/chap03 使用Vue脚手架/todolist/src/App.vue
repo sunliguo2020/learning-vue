@@ -69,14 +69,14 @@ export default {
       });
     },
   },
-  mounted() {
-    // console.log("App mounted",this)
-    this.$bus.$on('checkTodo',this.checkTodo)
-    this.$bus.$on('deleteTodo',this.deleteTodo)
-  },
-  beforeDestory(){
-    this.$bus.$off('checkTodo')
-    this.$bus.$off('deleteTodo')
+    mounted() {
+      // console.log("App mounted",this)
+      this.$bus.$on('checkTodo',this.checkTodo)
+      this.$bus.$on('deleteTodo',this.deleteTodo)
+    },
+    beforeDestory(){
+      this.$bus.$off('checkTodo')
+      this.$bus.$off('deleteTodo')
 
   },
   watch: {
