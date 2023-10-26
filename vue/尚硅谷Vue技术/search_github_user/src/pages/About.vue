@@ -5,6 +5,13 @@
 <script>
 export default {
   name: "About",
+  mounted(){
+    console.log('About组件挂载完毕了',this)
+
+  },
+  beforeDestroy(){
+    console.log('About组件即将被销毁了')
+  }
 };
 </script>
 
