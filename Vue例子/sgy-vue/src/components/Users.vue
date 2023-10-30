@@ -24,28 +24,31 @@
     </table>
     <!-- 分页展示 -->
     <input type="button" value="上一页" @click="prePage" />
-    <span
-      v-for="i in pageNum"
-      @click="page(i)"
-      :style="{ cursor: 'pointer', margin: '10px' }"
-      :key="i.index"
-      >{{ i }}</span
-    >
+    <span v-for="i in pageNum" @click="page(i)" :style="{ cursor: 'pointer', margin: '10px' }" :key="i.index">{{ i
+    }}</span>
     <input type="button" value="下一页" @click="nextPage" />
+
+    <h3>饿了么展示</h3>
+    <el-table :data="tableData" style="width: 100%" :row-class-name="tableRowClassName">
+      <el-table-column prop="id" label="ID" width="180"> </el-table-column>
+      <el-table-column prop="realname" label="姓名" width="180">
+      </el-table-column>
+      <el-table-column prop="address" label="地址"> </el-table-column>
+    </el-table>
+    <el-pagination background layout="prev, pager, next" :total="1000">
+    </el-pagination>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 export default {
-  name: "users",
+  name: "Users",
   data() {
     return {
       results: [],
-
-      pageSize: 2, // 每页显示数量
+      pageSize: 10, // 每页显示数量
       pageNum: 1, // 共几页=所有数据/每页现实数量
-
       currentPage: 0, // 默认当前显示第一页
     };
   },
@@ -107,7 +110,10 @@ export default {
         var dataShow = this.totalPage[this.currentPage];
         return dataShow;
       },
-      set() {},
+      set() { },
+    },
+    tableData() {
+      return this.results;
     },
   },
   mounted() {
