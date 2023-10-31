@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div >
     <div>
       <h5>导航</h5>
       <router-link to="/user">User</router-link>
@@ -13,8 +13,9 @@
 </template>
 
 <script>
-import Users from './components/Users.vue'
-import Person from './components/Person.vue'
+
+import Users from './pages/Users.vue'
+import Person from './pages/Person.vue'
 
 export default {
   name: 'App',

@@ -1,8 +1,7 @@
 import VueRouter from 'vue-router'
 
-import Users from '../components/Users.vue'
-// import Users from '../components/Users'
-import Person from '../components/Person'
+import Users from '../pages/Users.vue'
+import Person from '../pages/Person'
 
 const router  =new VueRouter({
     routes:[
