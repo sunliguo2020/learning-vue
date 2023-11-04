@@ -98,7 +98,7 @@ import { RouterView, RouterLink } from 'vue-router'
 
                     <!-- 文章列表 -->
                     <RouterView></RouterView>
-                    
+
                 </a-col>
                 <a-col :span="6">asdasd</a-col>
             </a-row>
@@ -107,7 +107,6 @@ import { RouterView, RouterLink } from 'vue-router'
             底部
         </footer>
     </div>
-  
 </template>
 
 <style lang="scss" >
@@ -115,7 +114,6 @@ import { RouterView, RouterLink } from 'vue-router'
 @import "bulma/sass/components/navbar.sass";
 @import "bulma/sass/elements/container.sass";
 @import "bulma/sass/elements/box.sass";
-
 </style>
 
 <style scoped>

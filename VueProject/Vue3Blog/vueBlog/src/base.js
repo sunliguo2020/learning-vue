@@ -1,4 +1,5 @@
 import {message,notification} from 'ant-design-vue'
+// 全局引入子组件
 import ArticleItem from './components/ArticleItem.vue'
 
 export default {

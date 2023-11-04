@@ -1,19 +1,69 @@
 <template>
-    <div class="box">
-        <h1><router-link to="/">文章标题</router-link> </h1>
+    <a-typography class="box">
+        <a-typography-title :level="3">
+            <router-link to="/">
+                {{ props.title }}
+            </router-link>
+        </a-typography-title>
         <a-space>
-            <span>作者：张三</span>
-            <span>分类：Vue3</span>
-            <span>发布日期：2002年11月6日</span>
+            
+                <a-space>
+                    <user-outlined></user-outlined>
+                    <span>作者：<slot name="author"></slot></span>
+                </a-space>
+            <slot name="category">
+                <a-space>
+                    <FolderOutlined></FolderOutlined>
+                    <span>
+                        分类：{{ props.category }}
+                    </span>
+                </a-space>
+            </slot>
+            <slot name="pubdate">
+                <a-space>
+                    <ClockCircleOutlined></ClockCircleOutlined>
+                    <span>
+                        发布日期：{{ props.pudate }}
+                    </span>
+                </a-space>
+            </slot>
         </a-space>
-        <p>
-            这是一个类似于bootstrap的第三方css框架，它非常简洁，没有带任何js相关的东西，只专注样式，我觉得里边一些通用的样式非常有用，使用其中的某些内置样式，可以进一步提高开发效率。
-        </p>
-    </div>
+        <a-typography-paragraph type="secondary">
+            {{ props.desc }}
+        </a-typography-paragraph>
+    </a-typography>
 </template>
 
-<script>
+<script setup>
 
+import { FolderOutlined, UserOutlined, ClockCircleOutlined } from '@ant-design/icons-vue'
+import { RouterLink } from 'vue-router'
+
+const props = defineProps({
+    title: {
+        type: String,
+        required: true,
+    },
+    link: String || Object,
+    author: {
+        type: String,
+        default: '张胜男'
+    },
+    desc: {
+        type: String,
+        default: '本课程'
+    },
+    category: {
+        type: String,
+        default: 'vue3'
+    },
+    pudate: {
+        type: String,
+        default: '2023-11-04'
+    }
+
+
+})
 </script>
 
 <style></style>
