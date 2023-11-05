@@ -75,7 +75,7 @@ function search1CallBack(){
 function search2CallBack(){
     console.log(search2Value.value)
 }
-
+console.log(import.meta.env)
 </script>
 
 <template>
