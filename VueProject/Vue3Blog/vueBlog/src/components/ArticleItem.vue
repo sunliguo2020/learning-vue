@@ -6,27 +6,26 @@
             </router-link>
         </a-typography-title>
         <a-space>
-            
-                <a-space>
-                    <user-outlined></user-outlined>
-                    <span>作者：<slot name="author"></slot></span>
-                </a-space>
-            <slot name="category">
-                <a-space>
-                    <FolderOutlined></FolderOutlined>
-                    <span>
-                        分类：{{ props.category }}
-                    </span>
-                </a-space>
-            </slot>
-            <slot name="pubdate">
-                <a-space>
-                    <ClockCircleOutlined></ClockCircleOutlined>
-                    <span>
-                        发布日期：{{ props.pudate }}
-                    </span>
-                </a-space>
-            </slot>
+            <a-space>
+                <user-outlined></user-outlined>
+                <span>作者：<slot name="author"></slot></span>
+            </a-space>
+
+            <a-space>
+                <FolderOutlined></FolderOutlined>
+                <span>
+                    分类：<slot name="category"></slot>
+                </span>
+            </a-space>
+
+
+            <a-space>
+                <ClockCircleOutlined></ClockCircleOutlined>
+                <span>
+                    发布日期：<slot name="pubdate"></slot>
+                </span>
+            </a-space>
+
         </a-space>
         <a-typography-paragraph type="secondary">
             {{ props.desc }}

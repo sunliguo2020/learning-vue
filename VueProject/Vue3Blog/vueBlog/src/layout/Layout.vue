@@ -1,6 +1,69 @@
 <script setup>
+import {computed} from 'vue'
 import { LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons-vue';
 import { RouterView, RouterLink } from 'vue-router'
+import AsideBox from '../components/AsideBox.vue';
+
+const newsData = [
+    {
+         title:'Vue3 + VueRouter + Vite + pinia组件化开发实战入门'
+    },
+    {
+         title:'Vue3 + VueRouter + Vite + pinia组件化开发实战入门'
+    },
+    {
+         title:'Vue3 + VueRouter + Vite + pinia组件化开发实战入门'
+    },
+    {
+         title:'Vue3 + VueRouter + Vite + pinia组件化开发实战入门'
+    }, {
+         title:'Vue3 + VueRouter'
+    },
+]
+
+const newsDataComp=computed(()=>{
+    let itemNewsData = []
+    newsData.forEach(item=>{
+        if(item.title.length >20){
+            item.title = item.title.substring(0,20)+'...'
+        }
+        itemNewsData.push(item)
+    })
+    return itemNewsData
+})
+const tagsData =[
+    {
+        name:'tag1',
+        color:'#87d068'
+    },
+    {
+        name:'tag2',
+        color:'#87d068'
+    },
+    {
+        name:'tag3',
+        color:'#87d068'
+    },
+    {
+        name:'tag4',
+        color:'#87d068'
+    },
+
+]
+const archiveData = [
+    {
+        date:'2022年11月8日'
+    },
+    {
+        date:'2022年11月8日'
+    },
+    {
+        date:'2022年11月8日'
+    },
+    {
+        date:'2022年11月8日'
+    },
+]
 </script>
 
 <template>
@@ -100,7 +163,13 @@ import { RouterView, RouterLink } from 'vue-router'
                     <RouterView></RouterView>
 
                 </a-col>
-                <a-col :span="6">asdasd</a-col>
+                <a-col :span="6">
+                <aside-box></aside-box>
+                <aside-box name='最新文章' type="news" :newsData="newsDataComp"></aside-box>
+                <aside-box name='标签' type="tag" :tagsData="tagsData"></aside-box>
+                <aside-box name='归档' type="archive" :archiveData="archiveData"></aside-box>
+                <aside-box></aside-box>
+                </a-col>
             </a-row>
         </div>
         <footer>
@@ -111,6 +180,7 @@ import { RouterView, RouterLink } from 'vue-router'
 
 <style lang="scss" >
 @import "bulma/sass/utilities/_all.sass";
+@import "bulma/sass/base/minireset.sass";
 @import "bulma/sass/components/navbar.sass";
 @import "bulma/sass/elements/container.sass";
 @import "bulma/sass/elements/box.sass";
