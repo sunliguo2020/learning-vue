@@ -1,5 +1,5 @@
 <script setup>
-import {computed} from 'vue'
+import {ref,computed} from 'vue'
 import { LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons-vue';
 import { RouterView, RouterLink } from 'vue-router'
 import AsideBox from '../components/AsideBox.vue';
@@ -64,6 +64,18 @@ const archiveData = [
         date:'2022年11月8日'
     },
 ]
+
+const search1Value = ref('')
+const search2Value = ref('')
+
+function search1CallBack(){
+    console.log(search1Value.value)
+}
+
+function search2CallBack(){
+    console.log(search2Value.value)
+}
+
 </script>
 
 <template>
@@ -164,7 +176,16 @@ const archiveData = [
 
                 </a-col>
                 <a-col :span="6">
-                <aside-box></aside-box>
+                    <aside-box 
+                        type="search" 
+                        @some-search="search1CallBack" 
+                        v-model:searchValue="search1Value">
+                    </aside-box>
+                    <aside-box 
+                        type="search" 
+                        @some-search="search2CallBack" 
+                        v-model:searchValue="search2Value">
+                    </aside-box> 
                 <aside-box name='最新文章' type="news" :newsData="newsDataComp"></aside-box>
                 <aside-box name='标签' type="tag" :tagsData="tagsData"></aside-box>
                 <aside-box name='归档' type="archive" :archiveData="archiveData"></aside-box>
