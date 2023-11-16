@@ -1,12 +1,14 @@
-# Vue是什么
+# 一、Vue核心
+
+## Vue是什么
 
 Vue是前端优秀框架，是一套用于构建用户界面的**渐进式框架**。
 
-# Vue API风格
+## Vue API风格
 
 Vue的组件可以按两种不同的风格书写：***选项式API***和**组合式API**
 
-# Vue开发前端的准备
+## Vue开发前端的准备
 
 > 前提条件：
 >
@@ -22,7 +24,7 @@ vuejs的使用官方提供了2中方式：
 
 目前官方推荐的项目构建项目：vue-CLI,vite
 
-# el唯一根标签
+## el唯一根标签
 
 ```vue
  <!-- 定义唯一根元素div -->
@@ -287,9 +289,9 @@ export default {
 
 ### 使用JavaScript表达式
 
+# 二、Vue组件化编程
 
-
-# 2、常用指令
+## 2、常用指令
 
 |         |                          |                       | 简写              |                      |
 | ------- | ------------------------ | --------------------- | ----------------- | -------------------- |
@@ -618,7 +620,7 @@ export default{
 </script>
 ```
 
-# 14 数组变化侦测
+## 14 数组变化侦测
 
 #### 变更方法
 
@@ -698,7 +700,7 @@ export default{
 </script>
 ```
 
-# 15 计算属性
+## 15 计算属性
 
 ```vue
 <template>
@@ -726,7 +728,7 @@ export default {
 </script>
 ```
 
-# 16 Class 绑定
+## 16 Class 绑定
 
 数据绑定的一个常见需求场景是操纵元素的CSS class列表。
 
@@ -769,7 +771,7 @@ export default {
 </style>
 ```
 
-# 17 style绑定
+## 17 style绑定
 
 ```vue
 <template>
@@ -796,7 +798,7 @@ export default {
 </script>
 ```
 
-# 18 侦听器 watch
+## 18 侦听器 watch
 
 监视属性watch:
 
@@ -856,7 +858,7 @@ export default {
 
 
 
-# 19表单输入绑定v-model
+## 19表单输入绑定v-model
 
 ```vue
 <input type="text" v-model="message">
@@ -887,7 +889,7 @@ export default {
 
 ```
 
-# 20 模板引用 $ref
+20 模板引用 $ref
 
 虽然Vue的声明性渲染模型为你抽象了大部分对DOM的直接操作，但在某些情况下，我们仍然需要直接访问的底层DOM元素。要实现这一点，我们可以使用特殊的ref attribute。
 
@@ -954,7 +956,7 @@ export default {
 
 
 
-# 21组件组成
+## 21组件组成
 
 关于组件名：
 
@@ -1060,7 +1062,7 @@ export default{
 
 
 
-# 22 组件嵌套关系
+## 22 组件嵌套关系
 
 通常一个应用会以一棵嵌套的组件树的形式来组织。
 
@@ -1086,7 +1088,7 @@ export default {
 <ChildComp/>
 ```
 
-# 23 组件传递数据_Props
+## 23 组件传递数据_Props
 
 组件与组件之间不是完全独立的。
 
@@ -1289,18 +1291,18 @@ li a {
 >
 >数据类型为数组或对象的时候，默认值需要返回工厂模式
 
-# 自定义事件组件交互 $emit
+## 自定义事件组件交互 $emit
 
 子组件还可以向父组件触发事件：
 
 ```vue
 export default{
-// 声明触发的事件
-emits:['response'],
-created(){
-//带参数触发
-this.$emit("resonse","hello from child")
-}
+        // 声明触发的事件
+        emits:['response'],
+        created(){
+            //带参数触发
+            this.$emit("resonse","hello from child")
+        }
 }
 ```
 
@@ -1374,6 +1376,69 @@ export default {
 }
 </script>
 ```
+
+### 封装子组件（父组件向子组件传值）
+
+1、父组件想要向子组件传值时，那么需要在子组件引入的地方绑定一个属性，属性值就是要传的数据，并且要在父组件中引入子组件。
+
+2、子组件使用props属性接收父组件传递过来的值。
+
+### 子组件向父组件传递事件和值
+
+ 在组件的模板表达式中，可以直接使用 $emit 方法触发自定义事件 (例如：在 v-on 的处理函数中)： 
+
+```vue
+<!-- MyComponent -->
+<button @click="$emit('someEvent')">click me</button>
+```
+
+ 父组件可以通过 `v-on` (缩写为 `@`) 来监听事件： 
+
+```vue
+<MyComponent @some-event="callback" />
+```
+
+
+
+# 三、使用Vue脚手架
+
+## 全局事件总线(GlobalEventBus)
+
+1、一种组件间通信的方式，适用于任意组件间通信
+
+2、安装全局事件总线：
+
+```vue
+new Vue({
+  render: h => h(App),
+  beforeCreate(){
+    //安装全局事件总线 $bus就是当前应用的vm
+    Vue.prototype.$bus = this
+  },
+  mounted(){
+    console.log(Vue.prototype)
+  }
+}).$mount('#app')
+```
+
+3、使用事件总线：
+
+- 接收数据
+
+  - A组件想接收数据，则在A组件中给$bus绑定自定义事件，事件的回调留在A组件自身。
+
+    - ```vue
+      methods:{
+      
+      },
+      mounted(){
+      this.$bus.$on('xxx',demo)
+      }
+      ```
+
+- 提供数据：this.$bus.$emit('xxxx'，数据)
+
+4、最好在beforeDestory钩子中，用$off去解绑当前组件中用到的事件。
 
 # 局部注册组件
 
@@ -1496,9 +1561,11 @@ export default {
 
 卸载时：beforeUnmount，unmounted
 
+# 四、Vue中的ajax
 
+## 4.1解决开发环境Ajax跨域问题
 
-# Axios网络请求
+### Axios网络请求
 
 ### 安装
 
@@ -1512,11 +1579,249 @@ npm install --save axios
 
 post请求
 
->
->
 >post请求的参数需要额外的处理
 >
 >安装依赖：npm install --save querystring
 >
 >转换格式：qs.stringify({})
+
+## 4.2github用户搜索案例
+
+## 4.3vue项目中常用的2个Ajax库
+
+## 4.4slot插槽
+
+> 插槽
+
+- 作用：让父组件可以向子组件指定位置插入html结构，也是一种组件间通信的方式，适用于父组件====>子组件
+- 分类：默认插槽、具名插槽、作用域插槽
+- 
+
+# 五、vuex
+
+## 5.1 理解vuex
+
+### 5.1.1 vuex是什么
+
+1、概念：专门在Vue中实现集中式状态（数据）管理的一个Vue插件，对Vue应用中多个组件的共享状态进行集中式的管理（读/写），也是一种组件间通信的方式，且适用于任意组件间通信。
+
+### 5.1.2 什么时候使用Vuex
+
+- 多个组件依赖于同一状态
+- 来自不同组件的行为需要变更同一状态
+
+### 5.1.3 搭建vuex环境
+
+- 创建文件 src/store/index.js
+
+  - ```vue
+    //该文件用于创建Vuex中最为核心的store
+    
+    //引入Vuex
+    import Vuex from 'vuex'
+    //引入Vue
+    import Vue from 'vue'
+    
+    //应用Vuex插件
+    Vue.use(Vuex)
+    
+    //响应组件中的动作
+    const actions = {
+    
+    }
+    //操作数据
+    const mutations = {
+    
+    }
+    //用于存储数据
+    const sate = {
+    
+    }
+    
+    //创建store
+    const store = new Vuex.Store({
+        actions,
+        mutations,
+        sate
+    })
+    
+    //暴露store
+    export default store
+    ```
+
+  - 在main.js中创建vm时传入store配置项
+
+    - ```
+      //引入sotre
+      import store from './store'
+      
+      //创建vm
+      new Vue({
+      el:"#app",
+      render:h=>h(App),
+      store
+      })
+      ```
+
+    - 
+
+# 六、vue-router
+
+## 6.1基本使用
+
+- 安装vue-router，命令：npm i vue-router
+
+- 应用插件 Vue.use(VueRouter)
+
+- 编写router配置项
+
+  - ```
+    //该文件专门用来创建整个应用的路由器
+    import VueRouter from 'vue-router'
+    
+    //引入组件
+    import About from '../components/About'
+    import  Home from '../components/Home'
+    
+    //创建一个路由器
+    const router = new VueRouter({
+        routes:[
+            {
+                path:'/about',
+                component:About,
+            },
+            {
+                path:'/home',
+                component:Home,
+            },
+        ]
+    })
+    
+    //暴露router
+    export default router
+    ```
+
+- 实现切换（active-class可配置高亮样式）
+
+  - <router-link active-class="active" to='/about'>About</router-link>
+  - 指定展示位置 <router-view></router-view>
+
+  
+
+  
+
+
+
+## 6.2 几个注意点
+
+- 路由组件通常存放在pages文件夹，一般组件存放在components文件夹
+- 通过切换，’隐藏‘了路由组件，默认是被销毁掉的，需要的时候再去挂载。
+- 每个组件都有自己的$route属性，里面存储着自己的路由信息
+- 整个应用只有一个router，可以通过组件的$router属性获取到。
+
+### 6.3 多级路由
+
+1、配置路由规则，使用children配置项：
+
+```
+routes:[
+        {
+            path:'/about',
+            component:About,
+        },
+        {
+            path:'/home',
+            component:Home,
+            children:[   //通过children配置子级路由
+                {
+                    path:'news', //此处一定不要写 /news
+                    component:News
+                },
+                {
+                    path:'message',
+                    component:Message
+                },
+
+            ]
+        },
+
+```
+
+2、跳转（要写完整路径）
+
+```
+
+<router-link class="list-group-item" active-class="active" to="/home/news">News</router-link>
+```
+
+### 6.4 路由传参  query参数
+
+1、传递参数
+
+```
+  <!-- 跳转路由并携带query参数 to字符串写法 -->
+        <!-- <router-link :to="`/home/message/detail?id=${m.id}&title=${m.title}`">{{ m.title }}</router-link> -->
+        
+        <!-- 跳转路由并携带query参数 to对象写法 -->
+        <router-link :to="{
+            path:'/home/message/detail',
+            query:{
+                id:m.id,
+                title:m.title
+            }
+        }">
+            {{ m.title }}
+        </router-link>
+```
+
+2、接收参数：
+
+```
+$route.query.id
+$route.query.title
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
