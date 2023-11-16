@@ -1,0 +1,49 @@
+<!--
+ * @Author: OBKoro1
+ * @Date: 2023-11-16 07:48:16
+ * @LastEditors: sunliguo sunliguo2006@qq.com
+ * @LastEditTime: 2023-11-16 12:54:51
+ * @FilePath: \learning-vue\前端\吴悠\easy-js\中篇：DOM&Timer\index.html
+ * @Description: 
+ * 
+ * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="block"> 默认内容</div>
+    <div id="container">
+        <p class="text">默认内容</p>
+        <p class="text">默认内容</p>
+        <p class="text">默认内容</p>
+        <p class="text">默认内容</p>
+    </div>
+    
+    <script>
+        var block = document.getElementById('block')
+        console.log(block)
+        block.textContent = 'JS设置的文本'
+
+        // var contents = document.getElementsByTagName('p')
+        var contents = document.querySelectorAll('p')
+        console.log(contents)
+        var textArr=[
+            '震山的虎',
+            '敏捷的豹',
+            '远见的鹰',
+            '善战的狼'
+        ]
+        for (var i =0 ;i<contents.length;i++){
+            // console.log(contents[i])
+            contents[i].textContent=textArr[i]
+        }
+        document.querySelectorAll
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+.box{
+    /* 1、尺寸 */
+    width: 500px;
+    height: 280px;
+    border: 3px dotted gray;
+    border-radius: 8px;
+    padding:15px;
+    box-sizing: border-box;
+    margin:30px auto;
+    /* margin-left: auto; */
+    /* 2、背景处理 */
+    background-image: url();
+    background-color: #f9f9f9;
+    box-shadow: 5px 5px 5px grey;
+    position: relative;
+}
+/* 3、文本处理 */
+.box p {
+    color:#666;
+    text-indent: 2em;
+}
+.box h1{
+    font-size:50px;
+    font-family: "黑体";
+    font-weight: normal;
+    text-align: center;
+    
+    background-color: orange;
+    height: 80px;
+    line-height: 80px;
+
+    text-shadow: 2px 2px 2px black;
+    text-decoration: dashed underline skyblue;
+}
+.box span{
+    color: orange;
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    /* 4、位置 */
+    /* position: absolute; */
+    /* 固定 */
+    position: fixed;
+    top:50px;
+    left:5px;
+}
