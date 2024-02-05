@@ -1,29 +1,25 @@
 <template>
 	<view class='out'>
-		<input type='text' :value="iptValue" @focus="onFocus" @blur="onBlur" />
-		<image src="../../static/chicken.gif" mode="" class="pic" 
+		<input type='text' :value="iptValue" @focus="isActive=true" @blur="isActive=false" />
+		<image src="../../static/chicken.gif" mode="" class="pic"
 		:class="isActive?'active':''"></image>
 	</view>
 </template>
 
 <script setup>
-	import {
-		ref
-	} from "vue";
+	import {ref} from "vue";
 	const iptValue = ref("");
 	const isActive = ref(false);
-
-	function onFocus(e) {
-		isActive.value = true;
-		// console.log(e);
-		console.log(isActive);
-	};
-
-	function onBlur(e) {
-		isActive.value = false;
-		// console.log(e);
-		console.log(isActive);
-	};
+	// function onFocus(e){
+	// 	isActive.value = true;
+	// 	// console.log(e);
+	// 	console.log(isActive);
+	// };
+	// function onBlur(e){
+	// 	isActive.value = false;
+	// 	// console.log(e);
+	// 	console.log(isActive);
+	// };
 </script>
 
 <style lang="scss" scoped>
@@ -38,19 +34,18 @@
 			z-index: 2;
 			background: #fff;
 		}
-
 		.pic {
 			width: 24px;
 			height: 24px;
-			z-index: 1;
+			z-index:1;
 			position: absolute;
-			top: 0px;
-			left: calc(50% - 12px);
+			top:0px;
+			left:calc(50% - 12px);
 			transition: top 0.3s;
 		}
-
 		.pic.active{
-		top:-24px;
-	}
+			top:-24px;
+		}
+
 	}
 </style>
