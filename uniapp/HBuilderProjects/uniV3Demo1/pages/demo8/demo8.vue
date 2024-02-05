@@ -4,7 +4,7 @@
 				:value="iptValue" 
 				@focus="isActive=true" 
 				@blur="isActive=false"
-				@input="onInput"
+				@input="event=>iptValue = event.detail.value"
 		/>
 		<image src="../../static/chicken.gif" mode="" class="pic" :class="isActive?'active':''"></image>
 		<view>预览：{{iptValue}}</view>
@@ -18,10 +18,10 @@
 	const iptValue = ref("");
 	const isActive = ref(false);
 
-	function onInput(e) {
-		iptValue.value = e.detail.value;
-		console.log(e);
-	}
+	// function onInput(e) {
+	// 	iptValue.value = e.detail.value;
+	// 	console.log(e);
+	// }
 </script>
 
 <style lang="scss" scoped>
