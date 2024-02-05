@@ -69,6 +69,14 @@
 				"navigationBarTitleText" : "",
 				"enablePullDownRefresh" : false
 			}
+		},
+		{
+			"path" : "pages/demo9/demo9",
+			"style" : 
+			{
+				"navigationBarTitleText" : "热梗案例",
+				"enablePullDownRefresh" : false
+			}
 		}
 	],
 	"globalStyle": {
