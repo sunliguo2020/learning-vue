@@ -1,0 +1,1 @@
+<view> 分类页面 <button bindtap="{{a}}" type="primary">选择学历</button><button bindtap="{{b}}">模态框</button></view>

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "xxm-layout": "../../components/xxm-layout/xxm-layout"
+  }
+}

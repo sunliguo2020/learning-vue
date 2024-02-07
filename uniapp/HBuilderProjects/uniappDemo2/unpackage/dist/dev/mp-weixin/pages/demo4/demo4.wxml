@@ -1,0 +1,1 @@
+<view view="layout"><scroll-view scroll-y="true" class="scroll" ref="scroll"><view></view></scroll-view><life-demo wx:if="{{a}}" u-i="04abd20c-0" bind:__l="__l"></life-demo></view>

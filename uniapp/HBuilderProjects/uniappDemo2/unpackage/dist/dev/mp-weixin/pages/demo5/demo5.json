@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "demo5",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "demo-child": "../../components/demo-child/demo-child"
+  }
+}

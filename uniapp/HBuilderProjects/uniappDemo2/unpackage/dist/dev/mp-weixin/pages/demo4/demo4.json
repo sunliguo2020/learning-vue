@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "demo4",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "life-demo": "../../components/life-demo/life-demo"
+  }
+}

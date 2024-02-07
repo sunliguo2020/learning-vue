@@ -1,0 +1,1 @@
+<view><xxm-layout u-s="{{['header','main']}}" u-i="3ed1b834-0" bind:__l="__l"><view slot="header"> demo1的头部 </view><view slot="main"> 首页main </view></xxm-layout></view>

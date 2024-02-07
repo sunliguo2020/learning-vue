@@ -1,0 +1,1 @@
+<view> demo页面 <navigator url="/pages/demo2/demo2">跳转到demo2</navigator><navigator url="/pages/demo4/demo4">跳转到demo4</navigator><view bindtap="{{a}}"> 跳转到demo2 </view></view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "uni-app",
+  "usingComponents": {
+    "xxm-layout": "../../components/xxm-layout/xxm-layout"
+  }
+}

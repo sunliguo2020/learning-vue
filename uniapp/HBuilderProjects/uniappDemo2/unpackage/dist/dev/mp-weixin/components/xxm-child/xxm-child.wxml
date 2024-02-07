@@ -1,0 +1,1 @@
+<view> 子组件 <button bindtap="{{a}}">按钮</button></view>

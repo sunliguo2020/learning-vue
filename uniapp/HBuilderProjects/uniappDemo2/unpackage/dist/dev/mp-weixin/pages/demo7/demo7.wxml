@@ -1,0 +1,1 @@
+<view class="layout data-v-9595efcd"><view class="box data-v-9595efcd"> 我是字体 <view class="text data-v-9595efcd">我是字体2</view></view><view wx:for="{{a}}" wx:for-item="item" class="text data-v-9595efcd">{{item.a}}</view></view>

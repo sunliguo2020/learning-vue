@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "xxm-child": "../../components/xxm-child/xxm-child"
+  }
+}

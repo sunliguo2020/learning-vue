@@ -1,0 +1,1 @@
+<view class="data-v-a71c84cf"><navigator class="data-v-a71c84cf" url="/pages/demo4/demo4" open-type="reLaunch">跳转到demo4</navigator><view wx:for="{{a}}" wx:for-item="item" class="data-v-a71c84cf">{{item.a}}</view><view wx:if="{{b}}" class="fixed data-v-a71c84cf">向上箭头 </view></view>
