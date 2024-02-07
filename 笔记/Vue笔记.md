@@ -1563,17 +1563,17 @@ new Vue({
 
 # 四、Vue中的ajax
 
-## 4.1解决开发环境Ajax跨域问题
+## 4.1 解决开发环境Ajax跨域问题
 
 ### Axios网络请求
 
-### 安装
+#### 安装
 
 ```
 npm install --save axios
 ```
 
-### 引入
+#### 引入
 
 组件中引入：import axios from "axios"
 
@@ -1585,17 +1585,111 @@ post请求
 >
 >转换格式：qs.stringify({})
 
-## 4.2github用户搜索案例
+## 4.2 github用户搜索案例
 
-## 4.3vue项目中常用的2个Ajax库
+## 4.3 vue项目中常用的2个Ajax库
 
-## 4.4slot插槽
+## 4.4 slot插槽
+
+在某些场景中，我们可能想要为组件传递一些模板片段，让自组件在它们的嘴贱中渲染这些片段。
 
 > 插槽
 
 - 作用：让父组件可以向子组件指定位置插入html结构，也是一种组件间通信的方式，适用于父组件====>子组件
 - 分类：默认插槽、具名插槽、作用域插槽
-- 
+
+#### 举例
+
+<FancyButton>组件：
+
+```
+<FancyButton>
+  Click me! <!-- 插槽内容 -->
+</FancyButton>
+```
+
+而 `<FancyButton>` 的模板是这样的：
+
+```vue
+<button class="fancy-btn">
+  <slot></slot> <!-- 插槽出口 -->
+</button>
+```
+
+`<slot>` 元素是一个**插槽出口** (slot outlet)，标示了父元素提供的**插槽内容** (slot content) 将在哪里被渲染。
+
+![插槽图示](F:\github\learning-vue\Vue笔记.assets\slots.inBPF2Hb.png)
+
+最终渲染出的 DOM 是这样：
+
+```
+<button class="fancy-btn">Click me!</button>
+```
+
+#### 默认内容
+
+```
+<button type="submit">
+  <slot>
+    Submit <!-- 默认内容 -->
+  </slot>
+</button>
+```
+
+#### 具名插槽
+
+```vue
+<div class="container">
+  <header>
+    <slot name="header"></slot>
+  </header>
+  <main>
+    <slot></slot>
+  </main>
+  <footer>
+    <slot name="footer"></slot>
+  </footer>
+</div>
+```
+
+在父组件中使用 `<BaseLayout>` 时，我们需要一种方式将多个插槽内容传入到各自目标插槽的出口。此时就需要用到**具名插槽**了：
+
+要为具名插槽传入内容，我们需要使用一个含 `v-slot` 指令的 `<template>` 元素，并将目标插槽的名字传给该指令：
+
+template
+
+```
+<BaseLayout>
+  <template v-slot:header>
+    <!-- header 插槽的内容放这里 -->
+  </template>
+</BaseLayout>
+```
+
+`v-slot` 有对应的简写 `#`，因此 `<template v-slot:header>` 可以简写为 `<template #header>`。其意思就是“将这部分模板片段传入子组件的 header 插槽中”。
+
+![具名插槽图示](F:\github\learning-vue\Vue笔记.assets\named-slots.giG_TKP2.png)
+
+下面我们给出完整的、向 `<BaseLayout>` 传递插槽内容的代码，指令均使用的是缩写形式：
+
+```
+<BaseLayout>
+  <template #header>
+    <h1>Here might be a page title</h1>
+  </template>
+
+  <template #default>
+    <p>A paragraph for the main content.</p>
+    <p>And another one.</p>
+  </template>
+
+  <template #footer>
+    <p>Here's some contact info</p>
+  </template>
+</BaseLayout>
+```
+
+
 
 # 五、vuex
 
