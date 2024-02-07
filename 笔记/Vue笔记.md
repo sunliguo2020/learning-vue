@@ -307,11 +307,25 @@ export default {
 | v-cloak |                          |                       |                   |                      |
 | v-once  |                          |                       |                   |                      |
 
+#### v-text 更新元素的文本内容
 
+- 期望的绑定值的类型：string
+
+- 实例
+
+  - ```
+    <span v-text="msg"></span>
+    <!--等同于-->
+    <span>{{msg}}</span>
+    ```
+
+  - 
 
 ## 7 属性绑定 v-bind
 
- 双大括号不能在 HTML attributes 中使用。想要响应式地绑定一个 attribute，应该使用 [`v-bind` 指令](https://cn.vuejs.org/api/built-in-directives.html#v-bind)： 
+v-bind 动态绑定一个或多个attribute，也可以是组件的prop。 
+
+双大括号不能在 HTML attributes 中使用。想要响应式地绑定一个 attribute，应该使用 [`v-bind` 指令](https://cn.vuejs.org/api/built-in-directives.html#v-bind)： 
 
 ```html
 <div v-bind:id="dynamicId"></div>
@@ -334,6 +348,55 @@ export default {
 </template>
 
 ```
+
+- 示例：
+
+- ```vue
+  <!-- 绑定 attribute -->
+  <img v-bind:src="imageSrc" />
+  
+  <!-- 动态 attribute 名 -->
+  <button v-bind:[key]="value"></button>
+  
+  <!-- 缩写 -->
+  <img :src="imageSrc" />
+  
+  <!-- 缩写形式的动态 attribute 名 (3.4+)，扩展为 :src="src" -->
+  <img :src />
+  
+  <!-- 动态 attribute 名的缩写 -->
+  <button :[key]="value"></button>
+  
+  <!-- 内联字符串拼接 -->
+  <img :src="'/path/to/images/' + fileName" />
+  
+  <!-- class 绑定 -->
+  <div :class="{ red: isRed }"></div>
+  <div :class="[classA, classB]"></div>
+  <div :class="[classA, { classB: isB, classC: isC }]"></div>
+  
+  <!-- style 绑定 -->
+  <div :style="{ fontSize: size + 'px' }"></div>
+  <div :style="[styleObjectA, styleObjectB]"></div>
+  
+  <!-- 绑定对象形式的 attribute -->
+  <div v-bind="{ id: someProp, 'other-attr': otherProp }"></div>
+  
+  <!-- prop 绑定。“prop” 必须在子组件中已声明。 -->
+  <MyComponent :prop="someThing" />
+  
+  <!-- 传递子父组件共有的 prop -->
+  <MyComponent v-bind="$props" />
+  
+  <!-- XLink -->
+  <svg><a :xlink:special="foo"></a></svg>
+  ```
+
+  
+
+- 
+
+
 
 v-bind指令只是将元素的id attribute与组件的dynamicld属性保持一致。如果绑定的值是null或者undefined，那么该attribute将会从渲染的元素上移除。
 
