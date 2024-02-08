@@ -13,22 +13,19 @@
     </div>
 
   </div>
-  
 </template>
 
 <script>
 export default {
   name: "Home",
-  mounted(){
-    console.log('Home组件挂载完毕了',this)
-
+  mounted() {
+    console.log('Home组件挂载完毕了', this)
   },
-  beforeDestroy(){
+  beforeDestroy() {
     console.log('Home组件即将被销毁了')
   }
-  
+
 };
 </script>
 
-<style>
-</style>
+<style></style>

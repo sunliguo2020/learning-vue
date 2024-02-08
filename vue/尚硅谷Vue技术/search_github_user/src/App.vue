@@ -43,6 +43,7 @@ export default {
   display: flex;
   justify-content: space-around;
 }
+
 video {
   width: 100%;
 }

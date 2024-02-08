@@ -12,7 +12,7 @@ import Detail from '../pages/Detail'
 const router = new VueRouter({
     routes:[
         {
-            name:'about',
+            name:'guanyu',
             path:'/about',
             component:About,
         },
@@ -29,6 +29,7 @@ const router = new VueRouter({
                     component:Message,
                     children:[
                         {
+                            name:'xiangqing',
                             path:'detail',
                             component:Detail
                         }
