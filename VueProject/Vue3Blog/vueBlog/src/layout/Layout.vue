@@ -1,78 +1,79 @@
 <script setup>
-import {ref,computed} from 'vue'
+import { ref, computed } from 'vue'
 import { LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons-vue';
 import { RouterView, RouterLink } from 'vue-router'
 import AsideBox from '../components/AsideBox.vue';
+import NavBar from './NavBar.vue';
 
 const newsData = [
     {
-         title:'Vue3 + VueRouter + Vite + pinia组件化开发实战入门'
+        title: 'Vue3 + VueRouter + Vite + pinia组件化开发实战入门'
     },
     {
-         title:'Vue3 + VueRouter + Vite + pinia组件化开发实战入门'
+        title: 'Vue3 + VueRouter + Vite + pinia组件化开发实战入门'
     },
     {
-         title:'Vue3 + VueRouter + Vite + pinia组件化开发实战入门'
+        title: 'Vue3 + VueRouter + Vite + pinia组件化开发实战入门'
     },
     {
-         title:'Vue3 + VueRouter + Vite + pinia组件化开发实战入门'
+        title: 'Vue3 + VueRouter + Vite + pinia组件化开发实战入门'
     }, {
-         title:'Vue3 + VueRouter'
+        title: 'Vue3 + VueRouter'
     },
 ]
 
-const newsDataComp=computed(()=>{
+const newsDataComp = computed(() => {
     let itemNewsData = []
-    newsData.forEach(item=>{
-        if(item.title.length >20){
-            item.title = item.title.substring(0,20)+'...'
+    newsData.forEach(item => {
+        if (item.title.length > 20) {
+            item.title = item.title.substring(0, 20) + '...'
         }
         itemNewsData.push(item)
     })
     return itemNewsData
 })
-const tagsData =[
+const tagsData = [
     {
-        name:'tag1',
-        color:'#87d068'
+        name: 'tag1',
+        color: '#87d068'
     },
     {
-        name:'tag2',
-        color:'#87d068'
+        name: 'tag2',
+        color: '#87d068'
     },
     {
-        name:'tag3',
-        color:'#87d068'
+        name: 'tag3',
+        color: '#87d068'
     },
     {
-        name:'tag4',
-        color:'#87d068'
+        name: 'tag4',
+        color: '#87d068'
     },
 
 ]
 const archiveData = [
     {
-        date:'2022年11月8日'
+        date: '2022年11月8日'
     },
     {
-        date:'2022年11月8日'
+        date: '2022年11月8日'
     },
     {
-        date:'2022年11月8日'
+        date: '2022年11月8日'
     },
     {
-        date:'2022年11月8日'
+        date: '2022年11月8日'
     },
 ]
 
 const search1Value = ref('')
 const search2Value = ref('')
 
-function search1CallBack(){
+function search1CallBack() {
     console.log(search1Value.value)
 }
 
-function search2CallBack(){
+function search2CallBack() {
     console.log(search2Value.value)
 }
 console.log(import.meta.env)
@@ -81,65 +82,7 @@ console.log(import.meta.env)
 <template>
     <div id="main">
         <header class="header">
-            <nav class="navbar is-spaced has-shadow" role="navigation" aria-label="main navigation">
-                <div class="container">
-                    <div class="navbar-brand">
-                        <a class="navbar-item" href="https://bulma.io">
-                            <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-                        </a>
-
-                        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
-                            data-target="navbarBasicExample">
-                            <span aria-hidden="true"></span>
-                            <span aria-hidden="true"></span>
-                            <span aria-hidden="true"></span>
-                        </a>
-                    </div>
-
-                    <div id="navbarBasicExample" class="navbar-menu">
-                        <div class="navbar-start">
-                            <a class="navbar-item">
-                                Home
-                            </a>
-
-                            <a class="navbar-item">
-                                Documentation
-                            </a>
-
-                            <div class="navbar-item has-dropdown is-hoverable">
-                                <a class="navbar-link">
-                                    More
-                                </a>
-
-                                <div class="navbar-dropdown">
-                                    <a class="navbar-item">
-                                        About
-                                    </a>
-                                    <a class="navbar-item">
-                                        Jobs
-                                    </a>
-                                    <a class="navbar-item">
-                                        Contact
-                                    </a>
-                                    <hr class="navbar-divider">
-                                    <a class="navbar-item">
-                                        Report an issue
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="navbar-end">
-                            <div class="navbar-item">
-                                <a-space>
-                                    <a-button type="primary">Login</a-button>
-                                    <a-button>Register</a-button>
-                                </a-space>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </nav>
+            <nav-bar></nav-bar>
         </header>
 
         <div class="container">
@@ -176,20 +119,14 @@ console.log(import.meta.env)
 
                 </a-col>
                 <a-col :span="6">
-                    <aside-box 
-                        type="search" 
-                        @some-search="search1CallBack" 
-                        v-model:searchValue="search1Value">
+                    <aside-box type="search" @some-search="search1CallBack" v-model:searchValue="search1Value">
                     </aside-box>
-                    <aside-box 
-                        type="search" 
-                        @some-search="search2CallBack" 
-                        v-model:searchValue="search2Value">
-                    </aside-box> 
-                <aside-box name='最新文章' type="news" :newsData="newsDataComp"></aside-box>
-                <aside-box name='标签' type="tag" :tagsData="tagsData"></aside-box>
-                <aside-box name='归档' type="archive" :archiveData="archiveData"></aside-box>
-                <aside-box></aside-box>
+                    <aside-box type="search" @some-search="search2CallBack" v-model:searchValue="search2Value">
+                    </aside-box>
+                    <aside-box name='最新文章' type="news" :newsData="newsDataComp"></aside-box>
+                    <aside-box name='标签' type="tag" :tagsData="tagsData"></aside-box>
+                    <aside-box name='归档' type="archive" :archiveData="archiveData"></aside-box>
+                    <aside-box></aside-box>
                 </a-col>
             </a-row>
         </div>
