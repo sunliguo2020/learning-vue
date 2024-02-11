@@ -1037,7 +1037,7 @@ export default {
 
   1、组件名尽可能回避HTML中已有的元素名称。
 
-  2、可以使用name配置项值当嘴贱在开发者工具中呈现的名字。
+  2、可以使用name配置项值指定组件在开发者工具中呈现的名字。
 
   一个简写方式：
 
@@ -1106,7 +1106,7 @@ export default{
 
 ```
 
-## 组件声明
+#### 组件声明
 
 ```vue
     <script>
@@ -1162,32 +1162,35 @@ export default {
 首先，子组件中需要声明它所接收的props：
 
 ```vue
+
+<script>
 //在子组件中
 export default{
 //简单声明接收
-props:['name','age','sex'],
-//接收的同时对数据进行类型限制
-props:{
-name:String,
-age:Number,
-sex:String,
-},
-props:{
-name:{
-type:String,
-required:true,
-},
-age:{
-type:Number,
-default:99,
-},
-sex:{
-type:String,
-require:true,
-}
-}
+	props:['name','age','sex'],
+	//接收的同时对数据进行类型限制
+	props:{
+			name:String,
+			age:Number,
+			sex:String,
+	},
+	props:{
+		name:{
+				type:String,
+				required:true,
+		},
+		age:{
+				type:Number,
+				default:99,
+		},
+		sex:{
+			type:String,
+			require:true,
+		}
+		}
+	}
 
-}
+</script>
 ```
 
 一旦声明，msg prop 就会暴露在this上，并可以在子组件的模板中使用。
@@ -1354,7 +1357,11 @@ li a {
 >
 >数据类型为数组或对象的时候，默认值需要返回工厂模式
 
-## 自定义事件组件交互 $emit
+## 24、自定义事件组件交互 $emit
+
+ ![1.png](Vue笔记.assets/7c3f59a18f8c477bb72e87661916fc04_tplv-k3u1fbpfcp-zoom-in-crop-mark_1512_0_0_0.webp) 
+
+
 
 子组件还可以向父组件触发事件：
 
