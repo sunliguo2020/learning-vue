@@ -1,0 +1,1 @@
+<view>{{'当前标题：'+title+''}}<pub-title vue-id="719c3a40-1" bind:__l="__l"></pub-title></view>

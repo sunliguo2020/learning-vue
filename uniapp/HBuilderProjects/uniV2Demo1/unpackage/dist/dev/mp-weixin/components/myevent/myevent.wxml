@@ -1,0 +1,1 @@
+<view><input type="text" placeholder="请输入" data-event-opts="{{[['input',[['onInput',['$event']]]],['tap',[['$emit',['somevent']]]]]}}" bindinput="__e" bindtap="__e"/></view>
