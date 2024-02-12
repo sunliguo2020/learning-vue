@@ -394,13 +394,9 @@ export default {
 
   
 
-- 
-
-
-
 v-bind指令只是将元素的id attribute与组件的dynamicld属性保持一致。如果绑定的值是null或者undefined，那么该attribute将会从渲染的元素上移除。
 
-> 温习提示：
+> 温馨提示：
 >
 > v-bind: 可以简写为：
 
@@ -952,7 +948,7 @@ export default {
 
 ```
 
-20 模板引用 $ref
+## 20 模板引用 $ref
 
 虽然Vue的声明性渲染模型为你抽象了大部分对DOM的直接操作，但在某些情况下，我们仍然需要直接访问的底层DOM元素。要实现这一点，我们可以使用特殊的ref attribute。
 
@@ -1019,7 +1015,7 @@ export default {
 
 
 
-## 21组件组成
+## 21、组件组成
 
 关于组件名：
 
@@ -1337,13 +1333,47 @@ li a {
 
 ```
 
+### Vue3 中的例子：
+
+子组件中：
+
+```vue
+<script setup>
+	// // 子组件声明
+	// const props = defineProps(['username', 'avatar'])
+	// console.log(props)
+	const props = defineProps({
+		username:{
+			type:String,
+			default:'匿名'
+		},
+		avatar:{
+			type:String,
+			default:'../../static/logo.png'
+		}
+	})
+	
+</script>
+```
+
+在子组件中使用computed属性
+
+```vue
+<script setup>
+    import {computed} from "vue"
+    const porps = defineProps(['username','avatar'])
+    const myname = computed(()=>props.username+"@")
+</script>
+
+```
+
 
 
 >## 注意事项 ##
 >
 >`props`传递数据，只能从父级传递到子级，不能反其道而行。
 
->功能：让组件接收外部传过来的数据
+>功能：让组件接收外部传过来的数据。
 >
 >- 传递数据：<Demo name="xxx"/>
 >- 接收数据：
@@ -1355,7 +1385,7 @@ li a {
 >
 >温馨提示：
 >
->数据类型为数组或对象的时候，默认值需要返回工厂模式
+>​				数据类型为数组或对象的时候，默认值需要返回工厂模式
 
 ## 24、自定义事件组件交互 $emit
 
@@ -1453,7 +1483,7 @@ export default {
 
 2、子组件使用props属性接收父组件传递过来的值。
 
-### 子组件向父组件传递事件和值
+### Vue3中子组件向父组件传递事件和值
 
  在组件的模板表达式中，可以直接使用 $emit 方法触发自定义事件 (例如：在 v-on 的处理函数中)： 
 
@@ -1466,6 +1496,57 @@ export default {
 
 ```vue
 <MyComponent @some-event="callback" />
+```
+
+例二、
+
+父组件：
+
+```vue
+<template>
+	<view>
+        父组件
+    	<xxm-child @add="onAdd"></xxm-child>
+    </view>
+</template>
+<script setup>
+    const onAdd = function(e){
+        console.log(e)
+    }
+</script>
+```
+
+
+
+子组件：
+
+```vue
+<template>
+<view>
+    子组件
+    <button @click="$emit('add',Math.random())">按钮</button>
+    </button>
+    </view>
+</template>
+```
+
+子组件第二种写法：
+
+```vue
+
+<template>
+<view>
+    子组件
+    <button @click="onClick">按钮</button>
+    </button>
+    </view>
+</template>
+<script setup>
+	const emit = defineEmits(['add']);
+    function onClick(){
+        emit("add",Math.random());
+    }
+</script>
 ```
 
 
@@ -1631,6 +1712,8 @@ new Vue({
 
 卸载时：beforeUnmount，unmounted
 
+![在这里插入图片描述](F:\github\learning-vue\笔记\Vue笔记.assets\fac3eb0428254a8fa204489c58ea5764.png#pic_center)
+
 # 四、Vue中的ajax
 
 ## 4.1 解决开发环境Ajax跨域问题
@@ -1661,7 +1744,7 @@ post请求
 
 ## 4.4 slot插槽
 
-在某些场景中，我们可能想要为组件传递一些模板片段，让自组件在它们的嘴贱中渲染这些片段。
+在某些场景中，我们可能想要为组件传递一些模板片段，让自组件在它们的组件中渲染这些片段。
 
 > 插槽
 
@@ -1670,7 +1753,7 @@ post请求
 
 #### 举例
 
-<FancyButton>组件：
+父组件中使用子组件<FancyButton>组件：
 
 ```
 <FancyButton>
@@ -1688,7 +1771,7 @@ post请求
 
 `<slot>` 元素是一个**插槽出口** (slot outlet)，标示了父元素提供的**插槽内容** (slot content) 将在哪里被渲染。
 
-![插槽图示](F:\github\learning-vue\Vue笔记.assets\slots.inBPF2Hb.png)
+![插槽图示](F:\github\learning-vue\笔记\Vue笔记.assets\slots.inBPF2Hb.png)
 
 最终渲染出的 DOM 是这样：
 
@@ -1738,7 +1821,7 @@ template
 
 `v-slot` 有对应的简写 `#`，因此 `<template v-slot:header>` 可以简写为 `<template #header>`。其意思就是“将这部分模板片段传入子组件的 header 插槽中”。
 
-![具名插槽图示](F:\github\learning-vue\Vue笔记.assets\named-slots.giG_TKP2.png)
+![具名插槽图示](F:\github\learning-vue\笔记\Vue笔记.assets\named-slots.giG_TKP2.png)
 
 下面我们给出完整的、向 `<BaseLayout>` 传递插槽内容的代码，指令均使用的是缩写形式：
 
