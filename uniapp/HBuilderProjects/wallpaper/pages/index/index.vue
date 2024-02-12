@@ -1,5 +1,5 @@
 <template>
-	<view class="homeLayout">
+	<view class="homeLayout pageBg">
 		<view class="banner">
 			<swiper circular indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#fff" autoplay>
 				<swiper-item v-for="item in 3">
@@ -22,7 +22,7 @@
 				</uni-icons>
 			</view>
 		</view>
-
+		<!-- 每日推荐 -->
 		<view class="select">
 			<common-title>
 				<template #name>每日推荐</template>
@@ -32,7 +32,6 @@
 						<view class="text">
 							<uni-dateformat :date="Date.now()" format="dd日"></uni-dateformat>
 						</view>
-						
 					</view>
 				</template>
 			</common-title>
@@ -40,11 +39,11 @@
 				<scroll-view scroll-x>
 					<view class="box" v-for="item in 8">
 						<image src="../../common/images/preview1.jpg" mode="aspectFill"></image>
-
 					</view>
 				</scroll-view>
 			</view>
 		</view>
+		<!-- 专题精选-->
 		<view class="theme">
 			<common-title>
 				<template #name>专题精选</template>
@@ -54,17 +53,19 @@
 			</common-title>
 			<view class="content">
 				<theme-item v-for="item in 8"></theme-item>
+				<theme-item :isMore="true"></theme-item>
 			</view>
 		</view>
-
 	</view>
 </template>
 
 <script setup>
-
+	function onClick(e) {
+		console.log('父组件', e)
+	}
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 	.homeLayout {
 		.banner {
 			width: 750rpx;
@@ -79,17 +80,23 @@
 					height: 100%;
 					padding: 0 30rpx;
 
-					image {
-						height: 100%;
+					.like {
 						width: 100%;
-						border-radius: 10rpx;
+						height: 100%;
+
+						image {
+							width: 100%;
+							height: 100%;
+							border-radius: 10rpx;
+						}
 					}
+
 				}
 			}
 		}
 
 		.notice {
-			width: 590rpx;
+			width: 690rpx;
 			height: 80rpx;
 			line-height: 80rpx;
 			background: #f9f9f9;
@@ -103,6 +110,12 @@
 				align-items: center;
 				justify-content: center;
 
+				:deep() {
+					.uni-icons {
+						color: #28b389 !important;
+					}
+				}
+
 				.text {
 					color: #28b389;
 					font-weight: 600;
@@ -111,12 +124,11 @@
 			}
 
 			.center {
-				flex: 1;
-
+				flex:1;
 				swiper {
 					height: 100%;
 
-					swiper-item {
+					&-item {
 						height: 100%;
 						font-size: 30rpx;
 						color: #666;
@@ -133,20 +145,27 @@
 				align-items: center;
 				justify-content: center;
 			}
-
 		}
 
 		.select {
-			padding-top: 50rpx;
-			.date{
-				color:#28b389;
-				display:flex;
+			padding-top: 50rpx 50rpx;
+
+			.date {
+				color: #28b389;
+				display: flex;
 				align-items: center;
-				.text{
-					margin-left:5rpx;
-					
+
+				:deep() {
+					.uni-icons {
+						color: #28b389 !important;
+					}
+				}
+
+				.text {
+					margin-left: 5rpx;
 				}
 			}
+
 			.content {
 				width: 720rpx;
 				margin-left: 30rpx;
@@ -163,8 +182,8 @@
 
 						image {
 							width: 100%;
-							heigth: 100%;
-							border-radius: 12rpx;
+							height: 100%;
+							border-radius: 10rpx;
 						}
 					}
 
@@ -174,18 +193,22 @@
 				}
 			}
 		}
-		.theme{
-			padding-top:50rpx;
+
+		.theme {
+			padding: 50rpx 0;
+
 			.more {
-				font-size:32rpx;
-				color:#888;
+				font-size: 32rpx;
+				color: #888;
+
 			}
-			.content{
-				margin-top:30rpx;
-				padding:0 30rpx;
-				display:grid;
-				gap:15rpx;
-				grid-template-columns:repeat(3,1fr);
+
+			.content {
+				margin-top: 30rpx;
+				padding: 0 30rpx;
+				display: grid;
+				gap: 15rpx;
+				grid-template-columns: repeat(3, 1fr);
 			}
 		}
 	}
