@@ -1,7 +1,8 @@
 {
-  "navigationBarTitleText": "",
+  "navigationBarTitleText": "list",
   "enablePullDownRefresh": false,
   "usingComponents": {
-    "myevent": "/components/myevent/myevent"
+    "myevent": "/components/myevent/myevent",
+    "mypop": "/components/mypop/mypop"
   }
 }

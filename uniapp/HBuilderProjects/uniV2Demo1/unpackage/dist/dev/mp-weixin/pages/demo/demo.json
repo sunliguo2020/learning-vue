@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "",
+  "navigationBarTitleText": "demo",
   "enablePullDownRefresh": false,
   "usingComponents": {
     "pub-title": "/components/pubTitle/pubTitle"

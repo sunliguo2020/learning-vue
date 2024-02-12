@@ -1,1 +1,1 @@
-<view><myevent vue-id="2e637200-1" bind:__l="__l"></myevent></view>
+<view><myevent vue-id="2e637200-1" bind:__l="__l"></myevent><button data-event-opts="{{[['tap',[['e0',['$event']]]]]}}" bindtap="__e">开启</button><mypop vue-id="2e637200-2" state="{{state}}" data-event-opts="{{[['^stateEnv',[['change']]]]}}" bind:stateEnv="__e" bind:__l="__l"></mypop></view>

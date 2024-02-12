@@ -1,0 +1,1 @@
+<view>弹出框样式<view class="box" style="{{'height:'+(state?'300rpx':'0')+';'}}"></view><button size="mini" data-event-opts="{{[['tap',[['onClose',['$event']]]]]}}" bindtap="__e">关闭</button></view>

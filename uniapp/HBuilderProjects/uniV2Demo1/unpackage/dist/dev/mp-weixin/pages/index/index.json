@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "uni-app",
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "pub-title": "/components/pubTitle/pubTitle"
   }

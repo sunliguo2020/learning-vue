@@ -1,29 +1,8 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pages/demo/demo"],{
 
-/***/ 34:
-/*!********************************************************************************************************!*\
-  !*** D:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/main.js?{"page":"pages%2Fdemo%2Fdemo"} ***!
-  \********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(wx, createPage) {
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-__webpack_require__(/*! uni-pages */ 26);
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 25));
-var _demo = _interopRequireDefault(__webpack_require__(/*! ./pages/demo/demo.vue */ 35));
-// @ts-ignore
-wx.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;
-createPage(_demo.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["createPage"]))
-
-/***/ }),
-
 /***/ 35:
 /*!*************************************************************************************!*\
-  !*** D:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/pages/demo/demo.vue ***!
+  !*** F:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/pages/demo/demo.vue ***!
   \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -62,7 +41,7 @@ component.options.__file = "pages/demo/demo.vue"
 
 /***/ 36:
 /*!********************************************************************************************************************!*\
-  !*** D:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/pages/demo/demo.vue?vue&type=template&id=eae40a34& ***!
+  !*** F:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/pages/demo/demo.vue?vue&type=template&id=eae40a34& ***!
   \********************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -84,7 +63,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ 37:
 /*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!D:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/pages/demo/demo.vue?vue&type=template&id=eae40a34& ***!
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!F:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/pages/demo/demo.vue?vue&type=template&id=eae40a34& ***!
   \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -134,7 +113,7 @@ render._withStripped = true
 
 /***/ 38:
 /*!**************************************************************************************************************!*\
-  !*** D:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/pages/demo/demo.vue?vue&type=script&lang=js& ***!
+  !*** F:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/pages/demo/demo.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -150,7 +129,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ 39:
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--13-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!D:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/pages/demo/demo.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--13-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!F:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/pages/demo/demo.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -179,7 +158,28 @@ var _default = {
 };
 exports.default = _default;
 
+/***/ }),
+
+/***/ 73:
+/*!********************************************************************************************************!*\
+  !*** F:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/main.js?{"page":"pages%2Fdemo%2Fdemo"} ***!
+  \********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(wx, createPage) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+__webpack_require__(/*! uni-pages */ 26);
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 25));
+var _demo = _interopRequireDefault(__webpack_require__(/*! ./pages/demo/demo.vue */ 35));
+// @ts-ignore
+wx.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;
+createPage(_demo.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["createPage"]))
+
 /***/ })
 
-},[[34,"common/runtime","common/vendor"]]]);
+},[[73,"common/runtime","common/vendor"]]]);
 //# sourceMappingURL=../../../.sourcemap/mp-weixin/pages/demo/demo.js.map

@@ -2,7 +2,7 @@
 
 /***/ 48:
 /*!********************************************************************************************************!*\
-  !*** D:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/main.js?{"page":"pages%2Flist%2Flist"} ***!
+  !*** F:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/main.js?{"page":"pages%2Flist%2Flist"} ***!
   \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -23,7 +23,7 @@ createPage(_list.default);
 
 /***/ 49:
 /*!*************************************************************************************!*\
-  !*** D:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/pages/list/list.vue ***!
+  !*** F:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/pages/list/list.vue ***!
   \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -62,7 +62,7 @@ component.options.__file = "pages/list/list.vue"
 
 /***/ 50:
 /*!********************************************************************************************************************!*\
-  !*** D:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/pages/list/list.vue?vue&type=template&id=7d5e07c6& ***!
+  !*** F:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/pages/list/list.vue?vue&type=template&id=7d5e07c6& ***!
   \********************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -84,7 +84,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ 51:
 /*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!D:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/pages/list/list.vue?vue&type=template&id=7d5e07c6& ***!
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!F:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/pages/list/list.vue?vue&type=template&id=7d5e07c6& ***!
   \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -100,6 +100,9 @@ try {
   components = {
     myevent: function () {
       return __webpack_require__.e(/*! import() | components/myevent/myevent */ "components/myevent/myevent").then(__webpack_require__.bind(null, /*! @/components/myevent/myevent.vue */ 61))
+    },
+    mypop: function () {
+      return __webpack_require__.e(/*! import() | components/mypop/mypop */ "components/mypop/mypop").then(__webpack_require__.bind(null, /*! @/components/mypop/mypop.vue */ 66))
     },
   }
 } catch (e) {
@@ -123,6 +126,11 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  if (!_vm._isMounted) {
+    _vm.e0 = function ($event) {
+      _vm.state = true
+    }
+  }
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -134,7 +142,7 @@ render._withStripped = true
 
 /***/ 52:
 /*!**************************************************************************************************************!*\
-  !*** D:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/pages/list/list.vue?vue&type=script&lang=js& ***!
+  !*** F:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/pages/list/list.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -150,7 +158,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ 53:
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--13-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!D:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/pages/list/list.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--13-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!F:/github/learning-vue/uniapp/HBuilderProjects/uniV2Demo1/pages/list/list.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -170,11 +178,14 @@ exports.default = void 0;
 //
 //
 //
+//
+//
 var _default = {
   emits: [],
   data: function data() {
     return {
-      list_title: '自定义首页'
+      list_title: '自定义首页',
+      state: false
     };
   },
   methods: {
@@ -186,6 +197,9 @@ var _default = {
     },
     onsomeevent: function onsomeevent(e) {
       console.log('addfasf', e);
+    },
+    change: function change(e) {
+      this.state = false;
     }
   }
 };
