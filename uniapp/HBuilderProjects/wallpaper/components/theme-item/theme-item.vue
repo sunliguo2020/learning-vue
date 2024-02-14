@@ -1,9 +1,9 @@
 <template>
 	<view class="themeItem">
-		<navigator url="/pages/classlist/classlist" class="box" v-if='!isMore'>
-			<image class="pic" src="../../common/images/classify1.jpg" mode="aspectFill"></image>
-			<view class="mask">明星美女</view>
-			<view class="tab">三天前更新</view>
+		<navigator :url="'/pages/classlist/classlist?id='+item._id+'&name='+item.name" class="box" v-if='!isMore'>
+			<image class="pic" :src="item.picurl" mode="aspectFill"></image>
+			<view class="mask">{{item.name}}</view>
+			<view class="tab">{{compareTimestamp(item.updateTime)}}前更新</view>
 		</navigator>
 		<navigator url="/pages/classify/classify" open-type="reLaunch" class="box more" v-if='isMore'>
 			<image class="pic" src="../../common/images/more.jpg" mode="aspectFill"></image>
@@ -16,11 +16,26 @@
 </template>
 
 <script setup>
+	import {compareTimestamp} from "@/utils/common.js"
+import { computed } from "vue";
 	defineProps({
 		isMore:{
 			type:Boolean,
 			default:false
+		},
+		item:{
+			type:Object,
+			default(){
+				return {
+					picurl:'../../common/images/more.jpg',
+					name:'默认名称',
+					updateTime:Date.now()
+				}
+			}
 		}
+	})
+	computed(()=>{
+		
 	})
 </script>
 

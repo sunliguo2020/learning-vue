@@ -11,8 +11,9 @@
 			"path" : "pages/classify/classify",
 			"style" : 
 			{
-				"navigationBarTitleText" : "分类",
-				"enablePullDownRefresh" : false
+				"navigationBarTitleText": "分类",
+				"enablePullDownRefresh" : false,
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -38,6 +39,22 @@
 				"navigationBarTitleText" : "预览",
 				"enablePullDownRefresh" : false,
 				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path" : "pages/notice/notice",
+			"style" : 
+			{
+				"navigationBarTitleText" : "公告",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/notice/detail",
+			"style" : 
+			{
+				"navigationBarTitleText" : "公告详情",
+				"enablePullDownRefresh" : false
 			}
 		}
 	],

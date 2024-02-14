@@ -1,13 +1,16 @@
 <template>
 	<view class="preview">
+		<!-- 壁纸轮播 -->
 		<swiper autoplay circular>
 			<swiper-item v-for="item in 5">
 				<image @click="maskChange" src="../../common/images/preview1.jpg" mode="aspectFill"></image>
 			</swiper-item>
 		</swiper>
-
-		<view  v-if="maskState" class="mask">
-			<view class="goBack"></view>
+		<!-- 遮罩层 -->
+		<view v-if="maskState" class="mask">
+			<view class="goBack" :style="{top:getStatusBarHeight()+'px'}" @click="()=>uni.navigateBack()">
+				<uni-icons type="back" color="#fff" size="20"></uni-icons>
+			</view>
 			<view class="time">
 				<uni-dateformat :date="new Date()" format="hh:mm"></uni-dateformat>
 			</view>
@@ -15,12 +18,12 @@
 				<uni-dateformat :date="new Date()" format="MM月dd日"></uni-dateformat>
 			</view>
 			<view class="footer">
-				<view class="box">
+				<view class="box" @click="clickInfo">
 					<uni-icons type="info" size="28"></uni-icons>
 					<view class="text">信息</view>
 				</view>
 
-				<view class="box">
+				<view class="box" @click="clickScore">
 					<uni-icons type="star" size="28"></uni-icons>
 					<view class="text">5分</view>
 				</view>
@@ -33,18 +36,133 @@
 
 		</view>
 
+		<!-- 弹出框 -->
+		<uni-popup ref="infoPopup" type="bottom">
+			<view class="infoPopup">
+				<view class="popHeader">
+					<view></view>
+					<view class="title">壁纸信息</view>
+					<view class="close" @click="clickInfoClose">
+						<uni-icons type="closeempty" size="18" color='#999'></uni-icons>
+					</view>
+				</view>
+				<scroll-view scroll-y>
+					<view class="content">
+						
+						<view class="row">
+							<view class="label">壁纸ID：</view>
+							<text selectable class='value'>232323</text>
+						</view>
+						
+						<view class="row">
+							<view class="label ">分类：</view>
+							<text selectable class='value class'>明星美女</text>
+						</view>
+						
+						<view class="row">
+							<view class="label">发布者：</view>
+							<text selectable class='value'>咸虾米</text>
+						</view>
+						
+						<view class="row" >
+							<view class="label">评分：</view>
+							<view class="value rate_box">
+								<uni-rate v-model="rate_value"  disabled @change="onChange"></uni-rate>
+								<text selectable class='score'>{{rate_value}}分</text>
+							</view>
+						</view>
+						
+						<view class="row">
+							<view class="label">摘要：</view>
+							<view class="value">
+								<text selectable class='value'>
+									照耀文字内容填充部分，摘要文字内容填充部分，摘要文字内容填充部分。
+								</text>
+							</view>
+						</view>
+						
+						<view class="row">
+							<view class="label">标签：</view>
+							<view class="value tabs">
+								<text selectable class='tab' v-for="item in 3">
+									标签名
+								</text>
+							</view>
+						</view>
+						
+					</view>
+
+				</scroll-view>
+			</view>
+		</uni-popup>
+	
+		<!-- 评分弹窗 -->
+		<uni-popup ref="scorePopup" :is-mask-click="false">
+			<view class="scorePopup">
+				<view class="popHeader">
+					<view></view>
+					<view class="title">星级评分</view>
+					<view class="close" @click="clickScoreClose">
+						<uni-icons type="closeempty" size="18" color="#999"></uni-icons>
+					</view>
+				</view>
+				<view class="content">
+					<uni-rate v-model="userScore" allow-half @change=""/>
+					<text class="text">{{userScore}}分</text>
+				</view>
+				<view class="footer">
+					<button @click="submitScore" :disabled="!userScore"  type="default" size="mini" plain>确认评分</button>
+				</view>
+			</view>
+		</uni-popup>
 	</view>
 </template>
 
 <script setup>
-import {ref} from "vue";
-const maskState = ref(true);
-const maskChange =()=>{
-	console.log("this:",this)
-	// console.log(this.maskState)
-	maskState.value = !maskState.value
-}
-
+	import {
+		ref
+	} from "vue";
+	import {getStatusBarHeight} from "@/utils/system.js"
+	const maskState = ref(true);
+	const infoPopup = ref(null);
+	const scorePopup = ref(null);
+	const userScore  = ref(0);
+	//info 弹窗关闭按钮
+	const clickInfoClose = ()=>{
+		infoPopup.value.close();
+	}
+	//info弹窗
+	const clickInfo = () => {
+		infoPopup.value.open();
+	};
+	//评分弹窗
+	const clickScore = ()=>{
+		scorePopup.value.open('center');
+		infoPopup.value.close();
+	}
+	//评分弹窗关闭
+	const clickScoreClose = (e)=>{
+		console.log(e)
+		scorePopup.value.close();
+	}
+	//确认评分
+	const submitScore = ()=>{
+		
+	}
+	//遮罩层状态
+	const maskChange = () => {
+		console.log(maskState);
+		maskState.value = !maskState.value
+	};
+	//星级评分
+	const onChange=function (e) {
+				console.log('rate发生改变:' + JSON.stringify(e));
+				userScore.value = e.value;
+			}
+	//返回
+	const goBack = ()=>{
+		uni.navigateBack();
+	}
 </script>
 
 <style lang="scss" scoped>
@@ -59,7 +177,7 @@ const maskChange =()=>{
 
 			image {
 				width: 100%;
-				height: 100%
+				height: 100%;
 			}
 		}
 
@@ -73,7 +191,20 @@ const maskChange =()=>{
 				width: fit-content;
 			}
 
-			.goBack {}
+			.goBack {
+				width:38rpx;
+				height:38rpx;
+				background: rgba(0,0,0,0.5);
+				left:30rpx;
+				margin-left:0;
+				border-radius: 100rpx;
+				top:0;
+				backdrop-filter: blur(10rpx);
+				border:1rpx solid rgba(255,255,255,0.3);
+				display:flex;
+				align-items:center;
+				justify-content: center;
+			}
 
 			.count {
 				top: 10vh;
@@ -90,11 +221,11 @@ const maskChange =()=>{
 				top: calc(10vh + 80rpx);
 				font-weight: 100;
 				line-height: 1em;
-				text-shadow: 0 4rpx reba(0, 0, 0, 0.3);
+				text-shadow: 0 4rpx rgba(0, 0, 0, 0.3);
 			}
 
 			.date {
-				font-size: 34repx;
+				font-size: 34rpx;
 				top: calc(10vh + 230rpx);
 				text-shadow: 0 2rpx rgba(0, 0, 0, 0.3);
 			}
@@ -109,20 +240,125 @@ const maskChange =()=>{
 				display: flex;
 				justify-content: space-around;
 				align-items: center;
-				box-shadow: 0 2rpx 0 rgba(0,0,0,0.1);
+				box-shadow: 0 2rpx 0 rgba(0, 0, 0, 0.1);
 				backdrop-filter: blur(20rpx);
-				.box{
-					display:flex;
+
+				.box {
+					display: flex;
 					flex-direction: column;
-					align-item:center;
-					justify-conent:center;
-					padding:2rpx 12rpx;
+					align-items: center;
+					justify-content: center;
+					padding: 2rpx 12rpx;
+	
 					// border:1px solid red;
-					.text{
-						font-size:26rpx;
-						color:$text-font-color-2;
+					.text {
+						font-size: 26rpx;
+						color: $text-font-color-2;
 					}
 				}
+			}
+		}
+		
+		.popHeader {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		
+			.title {
+				color: $text-font-color-2;
+				font-size: 26rpx;
+			}
+		
+			.close {
+				// border: 1px solid red;
+				padding: 6rpx;
+			}
+		}
+
+		.infoPopup {
+			background: #fff;
+			padding: 30rpx;
+			border-radius: 30rpx 30rpx 0 0;
+			overflow: hidden;
+
+			scroll-view {
+				max-height: 60vh;
+
+				.content {
+					.row {
+						display: flex;
+						padding: 16rpx 0;
+						font-size: 32rpx;
+						line-height: 1.7em;
+
+						.label {
+							color: $text-font-color-3;
+							width: 140rpx;
+							text-align: right;
+							font-size: 30rpx;
+						}
+
+						.value {
+							flex: 1;
+							width: 0;
+
+						}
+						.rate_box{
+							display: flex;
+							align-items: center;
+							.score{
+								font-size:26rpx;
+								color:#text-font-color-2;
+								padding-left: 10rpx;
+							}
+						}
+					
+						.tabs{
+							display:flex;
+							flex-wrap:wrap;
+							.tab{
+								border:1px solid $brand-theme-color;
+								color:$brand-theme-color;
+								font-size:22rpx;
+								padding:10rpx 30rpx;
+								border-radius: 40rpx;
+								line-height: 1em;
+								margin:0 10rpx 10rpx 0;
+							}
+						}
+						.class{
+							color:$brand-theme-color;
+						}
+					}
+				}
+			}
+		}
+		
+		.scorePopup{
+			background: #fff;
+			padding:30rpx;
+			width:70vw;
+			border-radius:30rpx;
+			.content{
+				padding:30rpx 0;
+				display:flex;
+				justify-content: center;
+				align-items: center;
+				
+				.text{
+					color:#FFCA3E;
+					padding-left: 10rpx;
+					width:80rpx;
+					line-height:1em;
+					text-align:right;
+					font-size:28rpx;
+				}
+			}
+			.footer{
+				padding:10rpx 0;
+				display:flex;
+				align-items: center;
+				justify-content: center;
 			}
 		}
 	}

@@ -1,9 +1,10 @@
 <template>
 	<view class="homeLayout pageBg">
+		<custom-nav-bar title="推荐"></custom-nav-bar>
 		<view class="banner">
 			<swiper circular indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#fff" autoplay>
-				<swiper-item v-for="item in 3">
-					<image src="../../static/images/xxmLogo.png" mode="aspectFill"></image>
+				<swiper-item v-for="item in bannerList" :key="item._id">
+					<image :src="item.picurl" mode="aspectFill"></image>
 				</swiper-item>
 			</swiper>
 		</view>
@@ -14,7 +15,11 @@
 			</view>
 			<view class="center">
 				<swiper vertical autoplay interval="2000" duration="300" circular>
-					<swiper-item v-for="item in 10">文字文字内容文字内容文字内容文字内容文字内容文字内容内容</swiper-item>
+					<swiper-item v-for="item in wallNewsList" :key ="item._id">
+						<navigator url="/pages/notice/detail">
+							{{item.title}}
+						</navigator>
+					</swiper-item>
 				</swiper>
 			</view>
 			<view class="right">
@@ -37,8 +42,8 @@
 			</common-title>
 			<view class="content">
 				<scroll-view scroll-x>
-					<view class="box" v-for="item in 8">
-						<image src="../../common/images/preview1.jpg" mode="aspectFill"></image>
+					<view class="box" v-for="item in randomList" :key="item._id" @click="goPreview">
+						<image :src="item.smallPicurl" mode="aspectFill"></image>
 					</view>
 				</scroll-view>
 			</view>
@@ -52,7 +57,7 @@
 				</template>
 			</common-title>
 			<view class="content">
-				<theme-item v-for="item in 8"></theme-item>
+				<theme-item v-for="item in classify" :key= "item._id" :item="item"></theme-item>
 				<theme-item :isMore="true"></theme-item>
 			</view>
 		</view>
@@ -60,9 +65,56 @@
 </template>
 
 <script setup>
+	import {
+		ref
+	} from "vue";
+	import {
+		apiGetBanner,
+		apiGetNotice,
+		apiGetRandomList,
+		apiGetClassify
+	} from "@/api/apis";
+
 	function onClick(e) {
 		console.log('父组件', e)
 	}
+	const goPreview = () => {
+		uni.navigateTo({
+			url: '/pages/preview/preview'
+		})
+	}
+	const bannerList = ref([]);
+	const randomList = ref([]);
+	const wallNewsList = ref([]);
+	const classify = ref([]);
+
+	//banner
+	const getBanner = async () => {
+		let res = await apiGetBanner();
+		bannerList.value = res.data;
+	};
+	// 每日推荐
+	const getRandomList = async () => {
+		let res = await apiGetRandomList();
+		randomList.value = res.data;
+	}
+	//公告
+	const getNewsList = async() =>{
+		let res = await apiGetNotice();
+		wallNewsList.value = res.data;
+	};
+	
+	//精选
+	const getClassify = async()=>{
+		let res = await apiGetClassify({'pageSize':8});
+		console.log(res);
+		classify.value = res.data;
+	}
+	
+	getNewsList();
+	getBanner();
+	getRandomList();
+	getClassify();
 </script>
 
 <style lang="scss" scoped>
@@ -124,7 +176,8 @@
 			}
 
 			.center {
-				flex:1;
+				flex: 1;
+
 				swiper {
 					height: 100%;
 
