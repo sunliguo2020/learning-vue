@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let [x, y] = [1, 20];
+        console.log(x, y);
+        let [, ,c] = [10, 20, 30];
+        console.log("c:",c);
+
+        let [a,...b] = [1,2,3,4,5,6]
+        console.log("a,b",a,b);
+
+        let x3 = 10
+        let y3 =20;
+        [x3,y3] = [y3,x3];
+        console.log(x3,y3)
+
+        // 解构混用
+        let person = {
+            name:'坤坤',
+            age:25,
+            like:['唱','跳','rap','篮球'],
+            works:{
+                music:['wait wait wait','鸡你太美'],
+                movies:['童话二分之一','鬼畜区常青树'],
+                friend:['成成','大宝贝','大黑牛']
+            }
+        };
+        let {works:{music:[,result],movies:newMov}} = person
+        console.log('result,newMow',result,newMov)
+    </script>
+</body>
+
+</html>
