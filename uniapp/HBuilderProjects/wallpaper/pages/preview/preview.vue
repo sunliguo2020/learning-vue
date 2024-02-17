@@ -1,16 +1,17 @@
 <template>
 	<view class="preview">
 		<!-- 壁纸轮播 -->
-		<swiper autoplay circular>
-			<swiper-item v-for="item in 5">
-				<image @click="maskChange" src="../../common/images/preview1.jpg" mode="aspectFill"></image>
+		<swiper  circular @change="swiperChange" :current="currentIndex">
+			<swiper-item v-for="(item,index) in picList" :key="item._id">
+				<image v-if="readImgs.includes(index)" @click="maskChange" :src="item.picurl" mode="aspectFill"></image>
 			</swiper-item>
 		</swiper>
 		<!-- 遮罩层 -->
 		<view v-if="maskState" class="mask">
-			<view class="goBack" :style="{top:getStatusBarHeight()+'px'}" @click="()=>uni.navigateBack()">
+			<view class="goBack" :style="{top:getStatusBarHeight()+'px'}" @click="goBack">
 				<uni-icons type="back" color="#fff" size="20"></uni-icons>
 			</view>
+			<view class="count">{{currentIndex+1}} / {{picList.length}}</view>
 			<view class="time">
 				<uni-dateformat :date="new Date()" format="hh:mm"></uni-dateformat>
 			</view>
@@ -25,7 +26,7 @@
 
 				<view class="box" @click="clickScore">
 					<uni-icons type="star" size="28"></uni-icons>
-					<view class="text">5分</view>
+					<view class="text">{{currentInfo.score}}分</view>
 				</view>
 
 				<view class="box">
@@ -48,70 +49,73 @@
 				</view>
 				<scroll-view scroll-y>
 					<view class="content">
-						
+
 						<view class="row">
 							<view class="label">壁纸ID：</view>
-							<text selectable class='value'>232323</text>
+							<text selectable class='value'>{{currentInfo._id}}</text>
 						</view>
-						
+
 						<view class="row">
 							<view class="label ">分类：</view>
 							<text selectable class='value class'>明星美女</text>
 						</view>
-						
+
 						<view class="row">
 							<view class="label">发布者：</view>
-							<text selectable class='value'>咸虾米</text>
+							<text selectable class='value'>{{currentInfo.nickname}}</text>
 						</view>
-						
-						<view class="row" >
+
+						<view class="row">
 							<view class="label">评分：</view>
 							<view class="value rate_box">
-								<uni-rate v-model="rate_value"  disabled @change="onChange"></uni-rate>
-								<text selectable class='score'>{{rate_value}}分</text>
+								<uni-rate   @change="onChange" :value="currentInfo.score"></uni-rate>
+								<text selectable class='score'>{{currentInfo.score}}分</text>
 							</view>
 						</view>
-						
+
 						<view class="row">
 							<view class="label">摘要：</view>
 							<view class="value">
 								<text selectable class='value'>
-									照耀文字内容填充部分，摘要文字内容填充部分，摘要文字内容填充部分。
+									{{currentInfo.description}}
 								</text>
 							</view>
 						</view>
-						
+
 						<view class="row">
 							<view class="label">标签：</view>
 							<view class="value tabs">
-								<text selectable class='tab' v-for="item in 3">
-									标签名
+								<text selectable class='tab' v-for="(item,index) in currentInfo.tabs"  :key="index">
+									{{item}}
 								</text>
 							</view>
 						</view>
-						
+
 					</view>
 
 				</scroll-view>
 			</view>
 		</uni-popup>
-	
+
 		<!-- 评分弹窗 -->
 		<uni-popup ref="scorePopup" :is-mask-click="false">
 			<view class="scorePopup">
 				<view class="popHeader">
 					<view></view>
-					<view class="title">星级评分</view>
+					<view class="title">{{isScore?'已经评过分了':'壁纸评分'}}</view>
 					<view class="close" @click="clickScoreClose">
 						<uni-icons type="closeempty" size="18" color="#999"></uni-icons>
 					</view>
 				</view>
 				<view class="content">
-					<uni-rate v-model="userScore" allow-half @change=""/>
+					<uni-rate v-model="userScore" 
+					allow-half 
+					@change="" 
+					:disabled="isScore"/>
 					<text class="text">{{userScore}}分</text>
 				</view>
 				<view class="footer">
-					<button @click="submitScore" :disabled="!userScore"  type="default" size="mini" plain>确认评分</button>
+					<button @click="submitScore" :disabled="!userScore||isScore" type="default" size="mini" plain>确认评分</button>
 				</view>
 			</view>
 		</uni-popup>
@@ -122,32 +126,112 @@
 	import {
 		ref
 	} from "vue";
-	import {getStatusBarHeight} from "@/utils/system.js"
+	import {
+		getStatusBarHeight
+	} from "@/utils/system.js";
+	import {
+		onShow,
+		onLoad
+	} from "@dcloudio/uni-app";
+	import {apiGetSetupScore} from '@/api/apis.js'
+
 	const maskState = ref(true);
 	const infoPopup = ref(null);
 	const scorePopup = ref(null);
-	const userScore  = ref(0);
+	const userScore = ref(0);
+	const picList = ref([]);
+	const currentId = ref(null);
+	const currentIndex = ref(0);
+	const currentInfo = ref(null);
+	const readImgs = ref([]);
+	const isScore = ref(false);
+	const storageClissList = uni.getStorageSync("storageClissList");
+	
+	picList.value = storageClissList.map(item => {
+		return {
+			...item,
+			picurl: item.smallPicurl.replace('_small.webp', ".jpg"),
+		}
+	});
+	console.log("storageClissList",storageClissList);
+	
+	onLoad((e) => {
+		// console.log('e.id',e.id);
+		// console.log('currentId',currentId.value);
+		currentId.value = e.id;
+		//当前图片的 索引
+		currentIndex.value= picList.value.findIndex(item => item._id === currentId.value);
+		currentInfo.value = picList.value[currentIndex.value];
+		readImgsFun();
+	});
+	
+	//更新图片索引
+	const swiperChange = (e)=>{
+		currentIndex.value = e.detail.current;
+		currentInfo.value = picList.value[currentIndex.value];
+		console.log('当前图片信息：',currentInfo.value);
+		readImgsFun();
+	};
+	
+	//已经浏览的图片
+	function readImgsFun(){
+		readImgs.value.push(
+		currentIndex.value<=0?picList.value.length-1:currentIndex.value-1,
+		currentIndex.value,
+		currentIndex.value>=picList.value.length-1?0:currentIndex.value+1
+		);
+		
+		readImgs.value = [...new Set(readImgs.value)]
+	};
+	
 	//info 弹窗关闭按钮
-	const clickInfoClose = ()=>{
+	const clickInfoClose = () => {
 		infoPopup.value.close();
-	}
+	};
 	//info弹窗
 	const clickInfo = () => {
 		infoPopup.value.open();
 	};
 	//评分弹窗
-	const clickScore = ()=>{
+	const clickScore = () => {
+		console.log('评分弹窗',currentInfo.value);
+		if(currentInfo.value.userScore){
+			isScore.value = true;
+			userScore.value = currentInfo.value.userScore;
+			console.log(userScore.value);
+		}
 		scorePopup.value.open('center');
 		infoPopup.value.close();
 	}
 	//评分弹窗关闭
-	const clickScoreClose = (e)=>{
-		console.log(e)
+	const clickScoreClose = (e) => {
+		// console.log(e)
 		scorePopup.value.close();
+		userScore.value = 0;
+		isScore.value = false;
 	}
 	//确认评分
-	const submitScore = ()=>{
+	const submitScore = async () => {
+		console.log(userScore.value);
+		console.log(userScore);
 		
+		let {classid,_id:wallId} = currentInfo.value;
+		
+		let res = await apiGetSetupScore({
+			classid,
+			wallId,
+			userScore:userScore.value
+		});
+		if (res.errCode === 0){
+			uni.showToast({
+				title:"评分成功",
+				icon:'none'
+			});
+			picList.value[currentIndex.value].userScore = userScore.value;
+			uni.setStorageSync("storageClissList",picList.value);
+			clickScoreClose();
+		}
+		console.log(res);
 	}
 	//遮罩层状态
 	const maskChange = () => {
@@ -155,12 +239,12 @@
 		maskState.value = !maskState.value
 	};
 	//星级评分
-	const onChange=function (e) {
-				console.log('rate发生改变:' + JSON.stringify(e));
-				userScore.value = e.value;
-			}
+	const onChange = function(e) {
+		console.log('rate发生改变:' + JSON.stringify(e));
+		userScore.value = e.value;
+	}
 	//返回
-	const goBack = ()=>{
+	const goBack = () => {
 		uni.navigateBack();
 	}
 </script>
@@ -192,17 +276,17 @@
 			}
 
 			.goBack {
-				width:38rpx;
-				height:38rpx;
-				background: rgba(0,0,0,0.5);
-				left:30rpx;
-				margin-left:0;
+				width: 38rpx;
+				height: 38rpx;
+				background: rgba(0, 0, 0, 0.5);
+				left: 30rpx;
+				margin-left: 0;
 				border-radius: 100rpx;
-				top:0;
+				top: 0;
 				backdrop-filter: blur(10rpx);
-				border:1rpx solid rgba(255,255,255,0.3);
-				display:flex;
-				align-items:center;
+				border: 1rpx solid rgba(255, 255, 255, 0.3);
+				display: flex;
+				align-items: center;
 				justify-content: center;
 			}
 
@@ -249,7 +333,7 @@
 					align-items: center;
 					justify-content: center;
 					padding: 2rpx 12rpx;
-	
+
 					// border:1px solid red;
 					.text {
 						font-size: 26rpx;
@@ -258,17 +342,17 @@
 				}
 			}
 		}
-		
+
 		.popHeader {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-		
+
 			.title {
 				color: $text-font-color-2;
 				font-size: 26rpx;
 			}
-		
+
 			.close {
 				// border: 1px solid red;
 				padding: 6rpx;
@@ -303,60 +387,66 @@
 							width: 0;
 
 						}
-						.rate_box{
+
+						.rate_box {
 							display: flex;
 							align-items: center;
-							.score{
-								font-size:26rpx;
-								color:#text-font-color-2;
+
+							.score {
+								font-size: 26rpx;
+								color: #text-font-color-2;
 								padding-left: 10rpx;
 							}
 						}
-					
-						.tabs{
-							display:flex;
-							flex-wrap:wrap;
-							.tab{
-								border:1px solid $brand-theme-color;
-								color:$brand-theme-color;
-								font-size:22rpx;
-								padding:10rpx 30rpx;
+
+						.tabs {
+							display: flex;
+							flex-wrap: wrap;
+
+							.tab {
+								border: 1px solid $brand-theme-color;
+								color: $brand-theme-color;
+								font-size: 22rpx;
+								padding: 10rpx 30rpx;
 								border-radius: 40rpx;
 								line-height: 1em;
-								margin:0 10rpx 10rpx 0;
+								margin: 0 10rpx 10rpx 0;
 							}
 						}
-						.class{
-							color:$brand-theme-color;
+
+						.class {
+							color: $brand-theme-color;
 						}
 					}
 				}
 			}
 		}
-		
-		.scorePopup{
+
+		.scorePopup {
 			background: #fff;
-			padding:30rpx;
-			width:70vw;
-			border-radius:30rpx;
-			.content{
-				padding:30rpx 0;
-				display:flex;
+			padding: 30rpx;
+			width: 70vw;
+			border-radius: 30rpx;
+
+			.content {
+				padding: 30rpx 0;
+				display: flex;
 				justify-content: center;
 				align-items: center;
-				
-				.text{
-					color:#FFCA3E;
+
+				.text {
+					color: #FFCA3E;
 					padding-left: 10rpx;
-					width:80rpx;
-					line-height:1em;
-					text-align:right;
-					font-size:28rpx;
+					width: 80rpx;
+					line-height: 1em;
+					text-align: right;
+					font-size: 28rpx;
 				}
 			}
-			.footer{
-				padding:10rpx 0;
-				display:flex;
+
+			.footer {
+				padding: 10rpx 0;
+				display: flex;
 				align-items: center;
 				justify-content: center;
 			}

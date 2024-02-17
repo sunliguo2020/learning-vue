@@ -20,12 +20,10 @@ const _sfc_main = {
       pageSize: 12
     };
     common_vendor.onLoad((e) => {
-      console.log(e);
       let {
         id = null,
         name = null
       } = e;
-      console.log(id, name);
       queryParms.classid = id;
       common_vendor.index.setNavigationBarTitle({
         title: name
@@ -46,6 +44,8 @@ const _sfc_main = {
       if (queryParms.pageSize > res.data.length) {
         noData.value = true;
       }
+      console.log(classList.value);
+      common_vendor.index.setStorageSync("storageClissList", classList.value);
     };
     return (_ctx, _cache) => {
       return common_vendor.e({
@@ -58,7 +58,8 @@ const _sfc_main = {
         c: common_vendor.f(classList.value, (item, k0, i0) => {
           return {
             a: item.smallPicurl,
-            b: item.key
+            b: "/pages/preview/preview?id=" + item._id,
+            c: item._id
           };
         }),
         d: classList.value || noData.value

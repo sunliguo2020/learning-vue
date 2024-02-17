@@ -4,7 +4,7 @@
 			<uni-load-more status="loading"></uni-load-more>
 		</view>
 		<view class="content">
-			<navigator url="/pages/preview/preview" class="item" v-for="item in classList" :key="item.key">
+			<navigator :url="'/pages/preview/preview?id='+item._id" class="item" v-for="item in classList" :key="item._id">
 				<image :src="item.smallPicurl" mode="aspectFill"></image>
 			</navigator>
 		</view>
@@ -32,13 +32,13 @@
 		pageNum:1,
 		pageSize:12
 	};
-
+	//接受传递过来的参数，并修改标题
 	onLoad((e) => {
-		console.log(e);
+		// console.log(e);
 		let {
 			id = null, name = null
 		} = e;
-		console.log(id, name);
+		// console.log(id, name);
 		queryParms.classid = id;
 		uni.setNavigationBarTitle({
 			title: name
@@ -46,6 +46,7 @@
 		getClassList();
 	});
 	
+	//触底更新
 	onReachBottom(()=>{
 		queryParms.pageNum++;
 		if (noData.value){
@@ -53,7 +54,7 @@
 		}
 		getClassList();
 	})
-	//获取分类信息
+	//获取分类列表信息
 	const getClassList = async () => {
 		let res = await apiGetClassList(queryParms);
 		classList.value = [...classList.value,...res.data];
@@ -61,7 +62,11 @@
 		if (queryParms.pageSize > res.data.length){
 			noData.value = true;
 		}
+		console.log(classList.value);
+		//存储到缓存中
+		uni.setStorageSync("storageClissList",classList.value);
 	}
+	
 </script>
 
 <style lang="scss" scoped>
