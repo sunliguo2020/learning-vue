@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-on</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="myClick">点击1</button>
+        <button v-on:click="myClick2">点击2</button>
+        {{title}}
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:()=>{
+              return {title:"新世纪"}  
+            },
+            methods:{
+                    myClick:(e)=>{
+                        console.log(this);
+                        // console.log(title)
+                        console.log(this.title);
+                        this.title = 'sdfasfaf';
+                    },
+                    myClick2:function(){
+                        console.log(this)
+                        this.title='UI设计'
+                    }
+            }
+        })
+    </script>
+</body>
+</html>
