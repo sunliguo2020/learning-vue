@@ -130,6 +130,14 @@
 
 ## 4.1、页面周期函数
 
+首先要从@dcloudio/uni-app中引入
+
+```vue
+import {onReachBottom } from "@dcloudio/uni-app"	
+```
+
+
+
 ### 4.1.1 onReachBottom 触底加载更多
 
 ```vue
@@ -144,6 +152,43 @@ onReachBottom(()=>{
 ```
 
 ### 4.1.2 onPullDownRefresh 下拉刷新
+
+首先，在pages.json里找到当前页面的pages节点，并在style选项中开启enablePullDownRefresh,才能支持下拉刷新。
+
+```json
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+                "enablePullDownRefresh" : true, //开启下拉刷新
+			}
+		},
+		{
+			"path" : "pages/classify/classify",
+			"style" : 
+			{
+				"navigationBarTitleText": "分类",
+				"enablePullDownRefresh" : false,
+				"navigationStyle": "custom"
+			}
+		}
+        ]
+}
+```
+
+```
+//监听下拉刷新事件
+<script setup>
+onPullDownRefresh(()=>{
+//下拉刷新后
+})
+</script>
+```
+
+
 
 ### 4.1.3 onLoad 监听页面加载
 
