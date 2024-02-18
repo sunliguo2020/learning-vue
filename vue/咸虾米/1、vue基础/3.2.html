@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性传参</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{titDes("web前端")}}</h1>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                title:'新视觉培训',
+                desc :'手动阀手动阀'
+            },
+            computed:{
+                titDes(){
+                    return function(e){
+                        return '新视觉培训'+e;
+                    }
+                }
+            }
+        })
+        </script>
+</body>
+</html>

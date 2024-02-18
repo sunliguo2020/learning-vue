@@ -568,7 +568,7 @@ export default {
 
 内联处理器中的参数
 
-```
+```vue
 <template>
   <button @click="say('hi')">say</button>
   <button @click="say('what')">say what</button>
@@ -604,6 +604,14 @@ export default {
 };
 </script>
 ```
+
+#### 在内联事件处理器中访问事件参数
+
+有时我们需要在内联事件处理器中访问原生 DOM 事件。你可以向该处理器方法传入一个特殊的 `$event` 变量，或者使用内联箭头函数
+
+
+
+
 
 ## 13事件修饰符
 
@@ -761,6 +769,8 @@ export default{
 
 ## 15 计算属性
 
+当有些数据需要随着其他数据变动而变动时，就需要使用computed计算属性。在事件处理方法中，this指向的Vue实例的计算属性结果被缓存起来，只有依赖的响应式属性变化时，才会重新计算，返回最终结果。
+
 ```vue
 <template>
     <h3>{{itbaizhan.name}}</h3>
@@ -786,6 +796,35 @@ export default {
 }
 </script>
 ```
+
+#### 计算属性传参
+
+```vue
+
+<div id="app">
+        <h1>{{titDes("web前端")}}</h1>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                title:'新视觉培训',
+                desc :'手动阀手动阀'
+            },
+            computed:{
+                titDes(){
+                    return function(e){
+                        return '新视觉培训'+e;
+                    }
+                }
+            }
+        })
+        </script>
+```
+
+
+
+
 
 ## 16 Class 绑定
 
