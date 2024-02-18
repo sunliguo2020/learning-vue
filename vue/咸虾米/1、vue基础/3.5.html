@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <itembox/>
+    </div>
+    <template id="myTem">
+        <div>
+            <h3>新视觉实训基地</h3>
+            <p>web前端开发</p>
+        </div>
+    </template>
+    <script>
+        Vue.component("itembox",{
+            template:"#myTem"
+        })
+        new Vue({
+            el:"#app",
+            data:{
+
+            },
+            methods:{
+
+            }
+        })
+    </script>
+</body>
+</html>

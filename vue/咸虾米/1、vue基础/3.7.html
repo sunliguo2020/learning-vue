@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>axios网络请求</title>
+    <script src="js/vue.min.js"></script>
+    <script src="js/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        按钮
+            <button @click="clickBtn">获取列表</button>
+            <ul>
+                <li v-for="item in items">
+                    {{item.description}}
+                    <img :src="item.picurl">
+                </li>
+            </ul>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                    items:[]
+            },
+            methods:{
+                clickBtn(){
+                    axios.get("https://ku.qingnian8.com/dataApi/qingKu/getList.php").then((res)=>{
+                        console.log(res.data);
+                        this.items = res.data;
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+</html>

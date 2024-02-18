@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>局部组件+父组件传值</title>
+    <script src="js/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <itembox mytitle="微信小程序"></itembox>
+        <itembox mytitle="vue开发"></itembox>
+    </div>
+    <script>
+        const itembox = {
+            template: `
+            <div>
+                
+                <h1>{{title}}</h1>
+            <p>{{mytitle}}</p>
+                <br>
+                </div>
+          
+                `,
+            data() {
+                return {
+                    title: '局部组件'
+                }
+            },
+            props: ['mytitle']
+        }
+        new Vue({
+            el: "#app",
+            data: {
+
+            },
+            methods: {
+
+            },
+            components: {
+                itembox
+            }
+        })
+    </script>
+</body>
+
+</html>
