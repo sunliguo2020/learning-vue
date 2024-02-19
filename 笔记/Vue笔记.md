@@ -1097,7 +1097,7 @@ export default {
 </style>
 ```
 
-#### mycomponent
+#### 子组件：mycomponent
 
 ```vue
 <template>
@@ -1129,7 +1129,7 @@ App.vue
 </template>
 <script>
 //第一步：引入组件
-import MyComponent from "./components/mycomponent.vue"
+import MyComponent from "./components/mycomponent"
 
 export default{
     //第二步：注入组件
@@ -1140,6 +1140,33 @@ export default{
 </script>
 
 ```
+
+使用组件3个步骤：
+
+1、在父组件中引入子组件
+
+```vue
+import MyComponent from "./components/mycomponent"
+```
+
+2、注入组件
+
+```vue
+components:{
+        MyComponent,
+    }
+```
+
+3、显示组件
+
+```vue
+<template>
+    <!-- 第三步：显示组件 -->
+    <MyComponent/>
+</template>
+```
+
+
 
 #### 组件声明
 
