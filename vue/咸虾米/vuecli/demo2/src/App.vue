@@ -1,13 +1,30 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">Home</router-link> |
+      <router-link to="/">Home</router-link>|
       <router-link to="/about">About</router-link>
     </nav>
-    <router-view/>
+    <h1>新视觉实训基地{{ name }}</h1>
+    <!-- 第3步 使用组件 -->
+    <Itembox></Itembox>
+    <!-- <router-view/> -->
   </div>
 </template>
-
+<script>
+//第1步：引入组件
+import Itembox from "@/components/ItemBox";
+export default {
+  data() {
+    return {
+      name: "张三"
+    };
+  },
+  //第2步：注入组件
+  components: {
+    Itembox
+  }
+};
+</script>
 <style lang="less">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
