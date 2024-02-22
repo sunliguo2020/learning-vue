@@ -59,8 +59,8 @@
 					}
 				})
 			},
-			getPingLun:()=>{
-				console.log('getPinglun')
+			getPingLun(){
+				console.log('getPinglun');
 				this.getData();
 			}
 		}
