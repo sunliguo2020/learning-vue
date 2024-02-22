@@ -28,7 +28,7 @@ export default {
     methods: {
         add() {
             this.num ++;
-            //传递数据给父组件,this.emit("自定义事件名",变量1，变量2---)
+            //传递数据给父组件,this.$emit("自定义事件名",变量1，变量2---)
             this.$emit("add_num", this.num, this.msg)
         }
     }
