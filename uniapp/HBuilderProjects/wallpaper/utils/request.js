@@ -1,5 +1,8 @@
 const BASE_URL = "https://tea.qingnian8.com/api/bizhi"
+
+//使用Promise()方法封装了uni-app的uni.request方法
 export function request(config = {}) {
+	//resolve 成功  reject 失败
 	return new Promise((resolve, reject) => {
 		let {
 			url,
@@ -7,15 +10,17 @@ export function request(config = {}) {
 			header = {},
 			data = {}
 		} = config;
+
 		url = BASE_URL + url;
-		header['access-key'] = "xxm123321@#";
+		header['access-key'] = "xxm_sunliguo";
 		console.log(header);
-		
+
 		uni.request({
 			url,
 			data,
 			method,
 			header,
+			//成功后的回调
 			success: res => {
 				if (res.data.errCode == 0) {
 					resolve(res.data);
@@ -34,6 +39,7 @@ export function request(config = {}) {
 					rejct(res.data.data);
 				}
 			},
+			//失败后的回调
 			fail: err => {
 				reject(err);
 			}

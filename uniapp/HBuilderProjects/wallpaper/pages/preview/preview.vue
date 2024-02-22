@@ -1,7 +1,7 @@
 <template>
 	<view class="preview">
 		<!-- 壁纸轮播 -->
-		<swiper  circular @change="swiperChange" :current="currentIndex">
+		<swiper circular @change="swiperChange" :current="currentIndex">
 			<swiper-item v-for="(item,index) in picList" :key="item._id">
 				<image v-if="readImgs.includes(index)" @click="maskChange" :src="item.picurl" mode="aspectFill"></image>
 			</swiper-item>
@@ -68,7 +68,7 @@
 						<view class="row">
 							<view class="label">评分：</view>
 							<view class="value rate_box">
-								<uni-rate   @change="onChange" :value="currentInfo.score"></uni-rate>
+								<uni-rate @change="onChange" :value="currentInfo.score"></uni-rate>
 								<text selectable class='score'>{{currentInfo.score}}分</text>
 							</view>
 						</view>
@@ -85,7 +85,7 @@
 						<view class="row">
 							<view class="label">标签：</view>
 							<view class="value tabs">
-								<text selectable class='tab' v-for="(item,index) in currentInfo.tabs"  :key="index">
+								<text selectable class='tab' v-for="(item,index) in currentInfo.tabs" :key="index">
 									{{item}}
 								</text>
 							</view>
@@ -108,14 +108,12 @@
 					</view>
 				</view>
 				<view class="content">
-					<uni-rate v-model="userScore" 
-					allow-half 
-					@change="" 
-					:disabled="isScore"/>
+					<uni-rate v-model="userScore" allow-half @change="" :disabled="isScore" />
 					<text class="text">{{userScore}}分</text>
 				</view>
 				<view class="footer">
-					<button @click="submitScore" :disabled="!userScore||isScore" type="default" size="mini" plain>确认评分</button>
+					<button @click="submitScore" :disabled="!userScore||isScore" type="default" size="mini"
+						plain>确认评分</button>
 				</view>
 			</view>
 		</uni-popup>
@@ -133,7 +131,10 @@
 		onShow,
 		onLoad
 	} from "@dcloudio/uni-app";
-	import {apiGetSetupScore} from '@/api/apis.js'
+
+	import {
+		apiGetSetupScore
+	} from '@/api/apis.js'
 
 	const maskState = ref(true);
 	const infoPopup = ref(null);
@@ -145,45 +146,46 @@
 	const currentInfo = ref(null);
 	const readImgs = ref([]);
 	const isScore = ref(false);
+	//获取缓存中的数据
 	const storageClissList = uni.getStorageSync("storageClissList");
-	
+
 	picList.value = storageClissList.map(item => {
 		return {
 			...item,
 			picurl: item.smallPicurl.replace('_small.webp', ".jpg"),
 		}
 	});
-	console.log("storageClissList",storageClissList);
-	
+	console.log("storageClissList", storageClissList);
+
 	onLoad((e) => {
 		// console.log('e.id',e.id);
 		// console.log('currentId',currentId.value);
 		currentId.value = e.id;
 		//当前图片的 索引
-		currentIndex.value= picList.value.findIndex(item => item._id === currentId.value);
+		currentIndex.value = picList.value.findIndex(item => item._id === currentId.value);
 		currentInfo.value = picList.value[currentIndex.value];
 		readImgsFun();
 	});
-	
+
 	//更新图片索引
-	const swiperChange = (e)=>{
+	const swiperChange = (e) => {
 		currentIndex.value = e.detail.current;
 		currentInfo.value = picList.value[currentIndex.value];
-		console.log('当前图片信息：',currentInfo.value);
+		console.log('当前图片信息：', currentInfo.value);
 		readImgsFun();
 	};
-	
+
 	//已经浏览的图片
-	function readImgsFun(){
+	function readImgsFun() {
 		readImgs.value.push(
-		currentIndex.value<=0?picList.value.length-1:currentIndex.value-1,
-		currentIndex.value,
-		currentIndex.value>=picList.value.length-1?0:currentIndex.value+1
+			currentIndex.value <= 0 ? picList.value.length - 1 : currentIndex.value - 1,
+			currentIndex.value,
+			currentIndex.value >= picList.value.length - 1 ? 0 : currentIndex.value + 1
 		);
-		
+
 		readImgs.value = [...new Set(readImgs.value)]
 	};
-	
+
 	//info 弹窗关闭按钮
 	const clickInfoClose = () => {
 		infoPopup.value.close();
@@ -194,8 +196,8 @@
 	};
 	//评分弹窗
 	const clickScore = () => {
-		console.log('评分弹窗',currentInfo.value);
-		if(currentInfo.value.userScore){
+		console.log('评分弹窗', currentInfo.value);
+		if (currentInfo.value.userScore) {
 			isScore.value = true;
 			userScore.value = currentInfo.value.userScore;
 			console.log(userScore.value);
@@ -214,25 +216,28 @@
 	const submitScore = async () => {
 		console.log(userScore.value);
 		console.log(userScore);
-		
-		let {classid,_id:wallId} = currentInfo.value;
-		
+
+		let {
+			classid,
+			_id: wallId
+		} = currentInfo.value;
+
 		let res = await apiGetSetupScore({
 			classid,
 			wallId,
-			userScore:userScore.value
+			userScore: userScore.value
 		});
-		if (res.errCode === 0){
+		if (res.errCode === 0) {
 			uni.showToast({
-				title:"评分成功",
-				icon:'none'
+				title: "评分成功",
+				icon: 'none'
 			});
 			picList.value[currentIndex.value].userScore = userScore.value;
-			uni.setStorageSync("storageClissList",picList.value);
+			uni.setStorageSync("storageClissList", picList.value);
 			clickScoreClose();
 		}
 		console.log(res);
-	}
+	};
 	//遮罩层状态
 	const maskChange = () => {
 		console.log(maskState);

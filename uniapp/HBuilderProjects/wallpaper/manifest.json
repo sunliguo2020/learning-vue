@@ -1,5 +1,5 @@
 {
-    "name" : "wallpaper",
+    "name" : "mm咸虾米壁纸",
     "appid" : "__UNI__864AC9E",
     "description" : "",
     "versionName" : "1.0.0",
@@ -52,7 +52,8 @@
     "mp-weixin" : {
         "appid" : "wx24a3af9a60576c42",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : true,
+            "minified" : true
         },
         "usingComponents" : true
     },

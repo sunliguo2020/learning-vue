@@ -79,6 +79,7 @@
 		console.log('父组件', e)
 	}
 	const goPreview = () => {
+		//先加载数据到缓存中
 		uni.navigateTo({
 			url: '/pages/preview/preview'
 		})
