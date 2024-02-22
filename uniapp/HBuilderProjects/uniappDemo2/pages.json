@@ -61,6 +61,22 @@
 				"navigationBarTitleText" : "demo7",
 				"onReachBottomDistance": 500
 			}
+		},
+		{
+			"path" : "pages/demo8/demo8",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/demo9/demo9",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
 		}
 	],
 	"globalStyle": {
