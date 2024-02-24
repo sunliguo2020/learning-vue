@@ -4,6 +4,27 @@
 
 ## 1.1 HBuilder
 
+技巧一：创建自定义模板快速创建vue3页面
+
+新建uni-app页面->自定义模板->新建文本文件
+
+```vue
+<template>
+	<view>
+	</view>
+</template>
+
+<script setup>
+
+</script>
+
+<style lang="scss" scoped>
+
+</style>
+
+
+```
+
 
 
 # 二、常见组件

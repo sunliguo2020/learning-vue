@@ -609,9 +609,19 @@ export default {
 
 有时我们需要在内联事件处理器中访问原生 DOM 事件。你可以向该处理器方法传入一个特殊的 `$event` 变量，或者使用内联箭头函数
 
+```vue
+<template>
+<switch @change="onChange(124,$event)">开关</switch>
+</template>
+<script>
+	function onChange(a,e) {
+		console.log(e);
+		console.log(a)
+		isLoading.value = e.detail.value
+	}
+</script>
 
-
-
+```
 
 ## 13事件修饰符
 
@@ -1187,7 +1197,7 @@ components:{
 
 
 
-## 22 组件嵌套关系
+## 2.22 组件嵌套关系
 
 通常一个应用会以一棵嵌套的组件树的形式来组织。
 
@@ -1195,7 +1205,7 @@ components:{
 
 父组件可以在模板中渲染另一个组件作为子组件。要使用子组件间，我们需要先导入它：
 
-```vue
+```javascript
 import ChildComp from './ChildComp.vue'
 
 export default {
@@ -1207,13 +1217,13 @@ export default {
 
 我们还需要使用components选项注册组件。这里我们使用对象属性的简写形式在ChildComp键下中注册ChildComp组件。
 
-然后我们就可以在模板中使用组件
+然后我们就可以在模板中使用组件。
 
 ```
 <ChildComp/>
 ```
 
-## 23 组件传递数据_Props
+## 2.23 组件传递数据_Props
 
 组件与组件之间不是完全独立的。
 
@@ -1221,10 +1231,52 @@ export default {
 
 子组件可以通过props从父组件接收动态数据。
 
+在使用 `<script setup>` 的单文件组件中，props 可以使用 `defineProps()` 宏来声明：
+
+```vue
+<script setup>
+const props = defineProps(['foo'])
+console.log(props.foo)
+</script>
+```
+
+在没有使用 `<script setup>` 的组件中，prop 可以使用 [`props`](https://cn.vuejs.org/api/options-state.html#props) 选项来声明：
+
+```javascript
+export default {
+  props: ['foo'],
+  setup(props) {
+    // setup() 接收 props 作为第一个参数
+    console.log(props.foo)
+  }
+}
+```
+
+注意传递给 `defineProps()` 的参数和提供给 `props` 选项的值是相同的，两种声明方式背后其实使用的都是 prop 选项。
+
+除了使用字符串数组来声明 prop 外，还可以使用对象的形式：
+
+```
+// 使用 <script setup>
+defineProps({
+  title: String,
+  likes: Number
+})
+```
+
+```
+// 非 <script setup>
+export default {
+  props: {
+    title: String,
+    likes: Number
+  }
+}
+```
+
 首先，子组件中需要声明它所接收的props：
 
 ```vue
-
 <script>
 //在子组件中
 export default{
@@ -1251,7 +1303,6 @@ export default{
 		}
 		}
 	}
-
 </script>
 ```
 
@@ -1274,6 +1325,7 @@ export default{
 </template>
 
 <script>
+ //引入子组件
 import myComponent from "./components/myComponents.vue"
 
 export default {
@@ -1399,13 +1451,13 @@ li a {
 
 ```
 
-### Vue3 中的例子：
+### Vue3 中的例子组合式api：
 
 子组件中：
 
 ```vue
 <script setup>
-	// // 子组件声明
+	// 子组件声明
 	// const props = defineProps(['username', 'avatar'])
 	// console.log(props)
 	const props = defineProps({
@@ -1453,7 +1505,7 @@ li a {
 >
 >​				数据类型为数组或对象的时候，默认值需要返回工厂模式
 
-## 24、自定义事件组件交互 $emit
+## 2.24、自定义事件组件交互 $emit
 
  ![1.png](Vue笔记.assets/7c3f59a18f8c477bb72e87661916fc04_tplv-k3u1fbpfcp-zoom-in-crop-mark_1512_0_0_0.webp) 
 
