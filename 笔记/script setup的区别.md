@@ -59,3 +59,5 @@ const increment = () => {
 5. **兼容性**：由于 `<script setup>` 是 Vue 3 的新特性，所以在 Vue 2 的项目中不能使用。
 
 总的来说，`<script>` 和 `<script setup>` 都是有效的 Vue 组件脚本编写方式，选择哪种方式取决于你的项目需求、团队习惯和个人喜好。
+
+# 问题一  data ，methods 和setup可以一起写吗？
