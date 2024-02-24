@@ -17,7 +17,9 @@ const _sfc_main = {
   setup(__props) {
     const classifyList = common_vendor.ref([]);
     const getClassify = async () => {
-      let res = await api_apis.apiGetClassify({ "pageSize": 20 });
+      let res = await api_apis.apiGetClassify({
+        "pageSize": 20
+      });
       console.log(res);
       classifyList.value = res.data;
     };

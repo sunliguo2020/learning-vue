@@ -7,10 +7,10 @@
 			<view class="titleBar" :style="{height:getTitleBarHeight()+'px'}">
 				<view class='title'>{{title}}</view>
 				<!-- 搜索 -->
-				<view class='search'>
+				<navigator url="/pages/search/search" class='search'>
 					<uni-icons class="icon" type='search' color="#888" size="18"></uni-icons>
 					<text class="text">搜索</text>
-				</view>
+				</navigator>
 			</view>
 		</view>
 		<view class="fill" :style="{height:getNavBarHeight()+'px'}">

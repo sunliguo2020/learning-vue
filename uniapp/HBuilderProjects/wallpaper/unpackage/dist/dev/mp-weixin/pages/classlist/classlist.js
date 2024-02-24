@@ -22,9 +22,15 @@ const _sfc_main = {
     common_vendor.onLoad((e) => {
       let {
         id = null,
-        name = null
+        name = null,
+        type = null
       } = e;
-      queryParms.classid = id;
+      if (type) {
+        queryParms.type = type;
+      }
+      if (id) {
+        queryParms.classid = id;
+      }
       common_vendor.index.setNavigationBarTitle({
         title: name
       });
@@ -38,13 +44,22 @@ const _sfc_main = {
       getClassList();
     });
     const getClassList = async () => {
-      let res = await api_apis.apiGetClassList(queryParms);
+      let res;
+      if (queryParms.classid) {
+        console.log("获取分类的信息");
+        res = await api_apis.apiGetClassList(queryParms);
+      }
+      if (queryParms.type) {
+        console.log("我的下载 我的评分");
+        res = await api_apis.apiGetHistoryList(queryParms);
+      }
+      console.log(res);
+      console.log("新获取的数据：", res.data);
       classList.value = [...classList.value, ...res.data];
-      console.log(res.data);
       if (queryParms.pageSize > res.data.length) {
         noData.value = true;
       }
-      console.log(classList.value);
+      console.log("准备将数据保存到缓存中：", classList.value);
       common_vendor.index.setStorageSync("storageClissList", classList.value);
     };
     return (_ctx, _cache) => {

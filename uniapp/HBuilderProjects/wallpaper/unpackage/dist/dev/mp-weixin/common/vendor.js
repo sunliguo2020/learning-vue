@@ -1504,7 +1504,7 @@ function populateParameters(fromRes, toRes) {
   const hostLanguage = language.replace(/_/g, "-");
   const parameters = {
     appId: "__UNI__864AC9E",
-    appName: "wallpaper",
+    appName: "mm咸虾米壁纸",
     appVersion: "1.0.0",
     appVersionCode: "100",
     appLanguage: getAppLanguage(hostLanguage),
@@ -1648,7 +1648,7 @@ const getAppBaseInfo = {
       hostSDKVersion: SDKVersion,
       hostTheme: theme,
       appId: "__UNI__864AC9E",
-      appName: "wallpaper",
+      appName: "mm咸虾米壁纸",
       appVersion: "1.0.0",
       appVersionCode: "100",
       appLanguage: getAppLanguage(hostLanguage)
@@ -7093,8 +7093,12 @@ const createSubpackageApp = initCreateSubpackageApp();
 const createHook = (lifecycle) => (hook, target = getCurrentInstance()) => {
   !isInSSRComponentSetup && injectHook(lifecycle, hook, target);
 };
+const onShow = /* @__PURE__ */ createHook(ON_SHOW);
 const onLoad = /* @__PURE__ */ createHook(ON_LOAD);
+const onUnload = /* @__PURE__ */ createHook(ON_UNLOAD);
 const onReachBottom = /* @__PURE__ */ createHook(ON_REACH_BOTTOM);
+const onShareTimeline = /* @__PURE__ */ createHook(ON_SHARE_TIMELINE);
+const onShareAppMessage = /* @__PURE__ */ createHook(ON_SHARE_APP_MESSAGE);
 exports._export_sfc = _export_sfc;
 exports.computed = computed;
 exports.createSSRApp = createSSRApp;
@@ -7106,6 +7110,10 @@ exports.n = n;
 exports.o = o;
 exports.onLoad = onLoad;
 exports.onReachBottom = onReachBottom;
+exports.onShareAppMessage = onShareAppMessage;
+exports.onShareTimeline = onShareTimeline;
+exports.onShow = onShow;
+exports.onUnload = onUnload;
 exports.p = p;
 exports.ref = ref;
 exports.resolveComponent = resolveComponent;

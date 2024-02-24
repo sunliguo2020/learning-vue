@@ -1,13 +1,25 @@
 <template>
 	<view class="homeLayout pageBg">
 		<custom-nav-bar title="推荐"></custom-nav-bar>
+
+		<!-- 轮播图 -->
 		<view class="banner">
 			<swiper circular indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#fff" autoplay>
 				<swiper-item v-for="item in bannerList" :key="item._id">
-					<image :src="item.picurl" mode="aspectFill"></image>
+					<navigator v-if="item.target == 'miniProgram'" :url="item.url" target="miniProgram" class="link"
+						:app-id="item.appid">
+						<image :src="item.picurl" mode="aspectFill"></image>
+					</navigator>
+
+					<navigator v-else :url="'/pages/classlist/classlist?'+item.url" class="link">
+						<image :src="item.picurl" mode="aspectFill"></image>
+					</navigator>
+
 				</swiper-item>
 			</swiper>
 		</view>
+
+		<!-- 公告 -->
 		<view class="notice">
 			<view class="left">
 				<uni-icons type="sound-filled" size="20" color="#28b389"></uni-icons>
@@ -15,8 +27,8 @@
 			</view>
 			<view class="center">
 				<swiper vertical autoplay interval="2000" duration="300" circular>
-					<swiper-item v-for="item in wallNewsList" :key ="item._id">
-						<navigator url="/pages/notice/detail">
+					<swiper-item v-for="item in wallNewsList" :key="item._id">
+						<navigator :url="`/pages/notice/detail?id=${item._id}`">
 							{{item.title}}
 						</navigator>
 					</swiper-item>
@@ -27,9 +39,11 @@
 				</uni-icons>
 			</view>
 		</view>
+
 		<!-- 每日推荐 -->
 		<view class="select">
 			<common-title>
+				<!-- 插槽 -->
 				<template #name>每日推荐</template>
 				<template #custom>
 					<view class="date">
@@ -39,25 +53,28 @@
 						</view>
 					</view>
 				</template>
+
 			</common-title>
+
 			<view class="content">
 				<scroll-view scroll-x>
-					<view class="box" v-for="item in randomList" :key="item._id" @click="goPreview">
+					<view class="box" v-for="item in randomList" :key="item._id" @click="goPreview(item._id)">
 						<image :src="item.smallPicurl" mode="aspectFill"></image>
 					</view>
 				</scroll-view>
 			</view>
 		</view>
+
 		<!-- 专题精选-->
 		<view class="theme">
 			<common-title>
 				<template #name>专题精选</template>
 				<template #custom>
-					<navigator url="" class="more">more</navigator>
+					<navigator url="/pages/classify/classify" open-type="switchTab" class="more">More+</navigator>
 				</template>
 			</common-title>
 			<view class="content">
-				<theme-item v-for="item in classify" :key= "item._id" :item="item"></theme-item>
+				<theme-item v-for="item in classify" :key="item._id" :item="item"></theme-item>
 				<theme-item :isMore="true"></theme-item>
 			</view>
 		</view>
@@ -68,22 +85,32 @@
 	import {
 		ref
 	} from "vue";
+
 	import {
 		apiGetBanner,
 		apiGetNotice,
 		apiGetRandomList,
-		apiGetClassify
+		apiGetClassify,
 	} from "@/api/apis";
+
+	import {
+		onShareAppMessage,
+		onShareTimeline
+	} from '@dcloudio/uni-app'
 
 	function onClick(e) {
 		console.log('父组件', e)
-	}
-	const goPreview = () => {
+	};
+	//跳转到预览页面
+	const goPreview = (id) => {
+		// console.log(id)
 		//先加载数据到缓存中
+		uni.setStorageSync("storageClissList", randomList.value)
 		uni.navigateTo({
-			url: '/pages/preview/preview'
+			url: '/pages/preview/preview?id=' + id
 		})
 	}
+
 	const bannerList = ref([]);
 	const randomList = ref([]);
 	const wallNewsList = ref([]);
@@ -100,18 +127,34 @@
 		randomList.value = res.data;
 	}
 	//公告
-	const getNewsList = async() =>{
+	const getNewsList = async () => {
 		let res = await apiGetNotice();
 		wallNewsList.value = res.data;
 	};
-	
+
 	//精选
-	const getClassify = async()=>{
-		let res = await apiGetClassify({'pageSize':8});
+	const getClassify = async () => {
+		let res = await apiGetClassify({
+			'pageSize': 8
+		});
 		console.log(res);
 		classify.value = res.data;
-	}
-	
+	};
+	//分享给好友
+	onShareAppMessage((e) => {
+		console.log(e);
+		return {
+			title: "咸虾米壁纸",
+			path: '/pages/index/index'
+		}
+	})
+	//分享朋友圈
+	onShareTimeline(() => {
+		console.log('分享到朋友圈');
+		return {
+			title: "咸虾米壁纸，好看的手机壁纸"
+		}
+	})
 	getNewsList();
 	getBanner();
 	getRandomList();
@@ -133,7 +176,7 @@
 					height: 100%;
 					padding: 0 30rpx;
 
-					.like {
+					.link {
 						width: 100%;
 						height: 100%;
 

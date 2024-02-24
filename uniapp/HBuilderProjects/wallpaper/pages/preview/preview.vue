@@ -18,7 +18,8 @@
 			<view class="date">
 				<uni-dateformat :date="new Date()" format="MM月dd日"></uni-dateformat>
 			</view>
-			<view class="footer">
+			<view class="footer" v-if="currentInfo">
+
 				<view class="box" @click="clickInfo">
 					<uni-icons type="info" size="28"></uni-icons>
 					<view class="text">信息</view>
@@ -29,12 +30,11 @@
 					<view class="text">{{currentInfo.score}}分</view>
 				</view>
 
-				<view class="box">
+				<view class="box" @click="clickDownload">
 					<uni-icons type="download" size="23"></uni-icons>
 					<view class="text">下载</view>
 				</view>
 			</view>
-
 		</view>
 
 		<!-- 弹出框 -->
@@ -48,7 +48,7 @@
 					</view>
 				</view>
 				<scroll-view scroll-y>
-					<view class="content">
+					<view class="content" v-if="currentInfo">
 
 						<view class="row">
 							<view class="label">壁纸ID：</view>
@@ -133,7 +133,8 @@
 	} from "@dcloudio/uni-app";
 
 	import {
-		apiGetSetupScore
+		apiGetSetupScore,
+		apiWriteDownload
 	} from '@/api/apis.js'
 
 	const maskState = ref(true);
@@ -251,6 +252,105 @@
 	//返回
 	const goBack = () => {
 		uni.navigateBack();
+	}
+
+	//下载壁纸
+	const clickDownload = async function() {
+		console.log('下载')
+		// #ifdef H5
+		uni.showModal({
+			showCancel: false,
+			title: "请长按保存壁纸!"
+		})
+		// #endif
+
+		// #ifndef H5
+		try {
+			uni.showLoading({
+				title: '下载中',
+				mask: true
+			});
+
+			let {
+				classid,
+				_id: wallId
+			} = currentInfo.value;
+
+			const res = await apiWriteDownload({
+				classid,
+				wallId
+			})
+			console.log("保存下载记录的接口", res);
+			if (res.errCode != 0) {
+				throw res;
+			}
+
+			uni.getImageInfo({
+				src: currentInfo.value.picurl,
+				success: (res) => {
+					console.log(res.path);
+					uni.saveImageToPhotosAlbum({
+						filePath: res.path,
+						success: (res) => {
+							console.log(res);
+							uni.showToast({
+								title: "保存壁纸成功",
+								icon: "none"
+							})
+						},
+						fail: err => {
+							console.log(err);
+							if (err.errMsg == "saveImageToPhotosAlbum:fail cancel") {
+								uni.showToast({
+									title: '保存失败，请重新点击下载',
+									icon: "none"
+								})
+							} else {
+								uni.showModal({
+									title: "授权提示",
+									content: "需要授权保存相册",
+									success: res => {
+										if (res.confirm) {
+											console.log('确认授权了');
+											uni.openSetting({
+												success: setting => {
+													console.log(
+														setting
+													);
+													if (setting
+														.authSetting[
+															'scope.writePhotosAlbum'
+														]) {
+														uni.showToast({
+															title: '获取授权成功',
+															icon: "none"
+														})
+													} else {
+														uni.showToast({
+															title: '获取授权失败',
+															icon: "none"
+														})
+													}
+												}
+											})
+										}
+									}
+								})
+
+							}
+						}
+					})
+				},
+				complete: () => {
+					uni.hideLoading()
+				}
+			})
+		} catch (err) {
+			console.log(err);
+			uni.hideLoading();
+
+		}
+		// #endif
 	}
 </script>
 

@@ -58,18 +58,10 @@
 			}
 		},
 		{
-			"path" : "pages/demo/demo",
+			"path" : "pages/search/search",
 			"style" : 
 			{
-				"navigationBarTitleText" : "demo",
-				"enablePullDownRefresh" : false
-			}
-		},
-		{
-			"path" : "pages/demo2/demo2",
-			"style" : 
-			{
-				"navigationBarTitleText" : "",
+				"navigationBarTitleText" : "搜索",
 				"enablePullDownRefresh" : false
 			}
 		}

@@ -41,6 +41,11 @@ export function request(config = {}) {
 			},
 			//失败后的回调
 			fail: err => {
+				uni.showToast({
+					title:'请求失败',
+					showCancel:false,
+					icon:"error",
+				})
 				reject(err);
 			}
 		})

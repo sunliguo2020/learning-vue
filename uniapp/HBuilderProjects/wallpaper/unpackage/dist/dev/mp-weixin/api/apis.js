@@ -34,8 +34,56 @@ function apiGetClassList(data = {}) {
     data
   });
 }
+function apiGetSetupScore(data = {}) {
+  return utils_request.request({
+    url: "/setupScore",
+    method: "GET",
+    data
+  });
+}
+function apiGetUserInfo(data = {}) {
+  return utils_request.request({
+    url: "/userInfo",
+    method: "GET",
+    data
+  });
+}
+function apiWriteDownload(data = {}) {
+  return utils_request.request({
+    url: "/downloadWall",
+    method: "GET",
+    data
+  });
+}
+function apiGetHistoryList(data = {}) {
+  return utils_request.request({
+    url: "/userWallList",
+    method: "GET",
+    data
+  });
+}
+function apiGetNoticeDetail(data = {}) {
+  return utils_request.request({
+    url: "/wallNewsDetail",
+    method: "GET",
+    data
+  });
+}
+function apiSearchData(data = {}) {
+  return utils_request.request({
+    url: "/searchWall",
+    method: "GET",
+    data
+  });
+}
 exports.apiGetBanner = apiGetBanner;
 exports.apiGetClassList = apiGetClassList;
 exports.apiGetClassify = apiGetClassify;
+exports.apiGetHistoryList = apiGetHistoryList;
 exports.apiGetNotice = apiGetNotice;
+exports.apiGetNoticeDetail = apiGetNoticeDetail;
 exports.apiGetRandomList = apiGetRandomList;
+exports.apiGetSetupScore = apiGetSetupScore;
+exports.apiGetUserInfo = apiGetUserInfo;
+exports.apiSearchData = apiSearchData;
+exports.apiWriteDownload = apiWriteDownload;

@@ -10,13 +10,14 @@ function request(config = {}) {
       data = {}
     } = config;
     url = BASE_URL + url;
-    header["access-key"] = "xxm123321@#";
+    header["access-key"] = "xxm_sunliguo";
     console.log(header);
     common_vendor.index.request({
       url,
       data,
       method,
       header,
+      //成功后的回调
       success: (res) => {
         if (res.data.errCode == 0) {
           resolve(res.data);
@@ -35,7 +36,13 @@ function request(config = {}) {
           rejct(res.data.data);
         }
       },
+      //失败后的回调
       fail: (err) => {
+        common_vendor.index.showToast({
+          title: "请求失败",
+          showCancel: false,
+          icon: "error"
+        });
         reject(err);
       }
     });

@@ -1,45 +1,47 @@
 <template>
 	<view class="userLayout pageBg">
-		<view class="userInfo">
+		<view :style="{height:getNavBarHeight()+'px'}"></view>
+		<view class="userInfo" v-if='userInfo'>
 			<view class="avatar">
 				<image src="../../static/images/xxmLogo.png" mode="aspectFill"></image>
 			</view>
 			<view class="ip">
-				10.10.10.10
+				{{userInfo.IP}}
 			</view>
-			<view class="address">来自于：山东</view>
+			<view class="address">
+				来自于:{{userInfo.address.country+'-'+userInfo.address.province+'-'+userInfo.address.city}}</view>
 		</view>
 		<view class="section">
 			<view class="list">
-				<navigator class="row" >
+				<navigator class="row" url="/pages/classlist/classlist?name=我的下载&type=download" >
 					<view class="left">
 						<uni-icons type="download-filled" size="20"></uni-icons>
 						<view class="text">我的下载</view>
 					</view>
 					<view class="right">
-						<view class="text">33</view>
+						<view class="text">{{userInfo.downloadSize}}</view>
 						<uni-icons type="right" size="15" color="#aaa"></uni-icons>
 					</view>
 				</navigator>
-				
-				<navigator class="row" >
+
+				<navigator class="row" url="/pages/classlist/classlist?name=我的评分&type=score">
 					<view class="left">
 						<uni-icons type="star-filled" size="20"></uni-icons>
 						<view class="text">我的评分</view>
 					</view>
 					<view class="right">
-						<view class="text">33</view>
+						<view class="text">{{userInfo.scoreSize}}</view>
 						<uni-icons type="right" size="15" color="#aaa"></uni-icons>
 					</view>
 				</navigator>
-				
-				<navigator class="row" >
+
+				<navigator class="row">
 					<view class="left">
 						<uni-icons type="chatboxes-filled" size="20"></uni-icons>
 						<view class="text">联系客服</view>
 					</view>
 					<view class="right">
-						<view class="text">33</view>
+						<view class="text"></view>
 						<uni-icons type="right" size="15" color="#aaa"></uni-icons>
 					</view>
 					<!-- #ifdef MP -->
@@ -51,44 +53,71 @@
 				</navigator>
 			</view>
 		</view>
-		
-		
+
+
 		<view class="section">
 			<view class="list">
-				<navigator class="row" >
+				<navigator class="row" url="/pages/notice/detail?id=653507c6466d417a3718e94b">
 					<view class="left">
 						<uni-icons type="notification-filled" size="20"></uni-icons>
 						<view class="text">订阅更新</view>
 					</view>
 					<view class="right">
-						<view class="text">33</view>
+						<view class="text"></view>
 						<uni-icons type="right" size="15"></uni-icons>
 					</view>
 				</navigator>
-				
-				<navigator class="row" >
+
+				<navigator class="row" url="/pages/notice/detail?id=6536358ce0ec19c8d67fbe82">
 					<view class="left">
 						<uni-icons type="flag-filled" size="20"></uni-icons>
 						<view class="text">常见问题</view>
 					</view>
 					<view class="right">
-						<view class="text">33</view>
+						<view class="text"></view>
 						<uni-icons type="right" size="15"></uni-icons>
 					</view>
 				</navigator>
-			
+
 			</view>
-			
+
 		</view>
 	</view>
 </template>
 
 <script setup>
-const onContact =()=>{
-	uni.makePhoneCall({
-		phoneNumber:"114"
+	import {
+		ref
+	} from "vue";
+	import { onLoad,onShow} from "@dcloudio/uni-app"
+	import {
+		getNavBarHeight
+	} from "@/utils/system.js"
+	import {
+		apiGetUserInfo,
+	} from "@/api/apis";
+
+	const userInfo = ref(null)
+
+	const onContact = () => {
+		uni.makePhoneCall({
+			phoneNumber: "15689266171"
+		})
+	}
+
+	const getUserInfo = async () => {
+		let res = await apiGetUserInfo()
+		console.log("userInfo", res);
+		userInfo.value = res.data;
+	}
+
+	getUserInfo();
+	onLoad(() => {
+		console.log('在onLoad中--');
+	});
+	onShow(()=>{
+		console.log('onShow---')
 	})
-}
 </script>
 
 <style lang="scss" scoped>
@@ -99,74 +128,83 @@ const onContact =()=>{
 			justify-content: center;
 			flex-direction: column;
 			padding: 50rpx 0;
-			
+
 			.avatar {
 				width: 160rpx;
 				height: 160rpx;
 				border-radius: 50%;
 				overflow: hidden;
-			
+
 				image {
 					width: 100%;
 					height: 100%;
 				}
 			}
+
 			.ip {
 				font-size: 44rpx;
 				color: #333;
 				padding: 20rpx 0 5 rpx;
 			}
+
 			.address {
 				font-size: 28rpx;
 				color: #aaa;
 			}
 		}
+
 		.section {
-			width:690rpx;
-			margin:50rpx auto;
-			border:1px solid #eee;
-			border-radius:10rpx;
-			box-shadow: 0 0 30rpx rgba(0,0,0,0.05);
-			.list{
-				.row{
-					display:flex;
+			width: 690rpx;
+			margin: 50rpx auto;
+			border: 1px solid #eee;
+			border-radius: 10rpx;
+			box-shadow: 0 0 30rpx rgba(0, 0, 0, 0.05);
+
+			.list {
+				.row {
+					display: flex;
 					justify-content: space-between;
-					align-items:center;
-					padding:0 30rpx;
-					height:100rpx;
-					border-bottom:1px solid #eee;
+					align-items: center;
+					padding: 0 30rpx;
+					height: 100rpx;
+					border-bottom: 1px solid #eee;
 					position: relative;
-					background:#fff;
-					&:last-child{
-						border-bottom:0;
+					background: #fff;
+
+					&:last-child {
+						border-bottom: 0;
 					}
+
 					.left {
-						display:flex;
+						display: flex;
 						align-items: center;
-						.text{
-							padding-left:20rpx;
-							color:#666;
+
+						.text {
+							padding-left: 20rpx;
+							color: #666;
 						}
 					}
-					.right{
-						display:flex;
+
+					.right {
+						display: flex;
 						align-items: center;
-						.text{
-							font-size:28rpx;
-							color:#aaa;
+
+						.text {
+							font-size: 28rpx;
+							color: #aaa;
 						}
 					}
-					button{
-						position:absolute;
-						top:0;
-						left:0;
-						height:100rpx;
-						width:100%;
+
+					button {
+						position: absolute;
+						top: 0;
+						left: 0;
+						height: 100rpx;
+						width: 100%;
 						opacity: 0;
 					}
 				}
 			}
 		}
 	}
-
 </style>

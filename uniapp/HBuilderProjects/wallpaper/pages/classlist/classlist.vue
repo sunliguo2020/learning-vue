@@ -24,7 +24,8 @@
 		onReachBottom
 	} from "@dcloudio/uni-app"
 	import {
-		apiGetClassList
+		apiGetClassList,
+		apiGetHistoryList
 	} from "@/api/apis.js"
 
 	const noData = ref(false);
@@ -37,10 +38,17 @@
 	onLoad((e) => {
 		// console.log(e);
 		let {
-			id = null, name = null
+			id = null, name = null, type = null
 		} = e;
 		// console.log(id, name);
-		queryParms.classid = id;
+		if (type) {
+			queryParms.type = type;
+		}
+		if (id) {
+			queryParms.classid = id;
+		}
+
+		//修改导航栏标题
 		uni.setNavigationBarTitle({
 			title: name
 		})
@@ -55,11 +63,21 @@
 		}
 		getClassList();
 	})
+
 	//获取分类列表信息
 	const getClassList = async () => {
-		let res = await apiGetClassList(queryParms);
+		let res;
+		if (queryParms.classid) {
+			console.log('获取分类的信息');
+			res = await apiGetClassList(queryParms);
+		}
+		if (queryParms.type) {
+			console.log('我的下载 我的评分');
+			res = await apiGetHistoryList(queryParms)
+		}
+		console.log(res);
 		console.log('新获取的数据：', res.data);
-		
+
 		//添加新获取的数据
 		classList.value = [...classList.value, ...res.data];
 
@@ -67,7 +85,7 @@
 		if (queryParms.pageSize > res.data.length) {
 			noData.value = true;
 		}
-		console.log('准备将数据保存到缓存中：',classList.value);
+		console.log('准备将数据保存到缓存中：', classList.value);
 		//存储到缓存中
 		uni.setStorageSync("storageClissList", classList.value);
 	}

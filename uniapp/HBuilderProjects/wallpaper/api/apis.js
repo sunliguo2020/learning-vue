@@ -33,6 +33,7 @@ export function apiGetClassify(data = {}) {
 };
 apiGetClassList
 
+//随机9张壁纸
 export function apiGetClassList(data = {}) {
 	return request({
 		url: "/wallList",
@@ -44,6 +45,53 @@ export function apiGetClassList(data = {}) {
 export function apiGetSetupScore(data = {}) {
 	return request({
 		url: "/setupScore",
+		method: 'GET',
+		data
+	});
+};
+
+//获取用户信息
+export function apiGetUserInfo(data = {}) {
+	return request({
+		url: "/userInfo",
+		method: 'GET',
+		data
+	});
+};
+
+
+//下载壁纸
+export function apiWriteDownload(data = {}) {
+	return request({
+		url: "/downloadWall",
+		method: 'GET',
+		data
+	});
+};
+
+
+//我的评分、下载列表
+export function apiGetHistoryList(data = {}) {
+	return request({
+		url: "/userWallList",
+		method: 'GET',
+		data
+	});
+};
+
+//获取公告
+export function apiGetNoticeDetail(data = {}) {
+	return request({
+		url: "/wallNewsDetail",
+		method: 'GET',
+		data
+	});
+};
+
+//搜索
+export function apiSearchData(data = {}) {
+	return request({
+		url: "/searchWall",
 		method: 'GET',
 		data
 	});
