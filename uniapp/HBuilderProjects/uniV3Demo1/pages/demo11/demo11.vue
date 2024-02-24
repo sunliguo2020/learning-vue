@@ -14,6 +14,9 @@
 	watch(person, (newValue, oldValue) => {
 		console.log(newValue);
 		console.log(oldValue);
+	},{
+		deep:true,
+		immediate:true, //立即 执行
 	});
 </script>
 

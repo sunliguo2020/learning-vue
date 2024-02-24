@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-	// // 子组件声明
+	// 子组件声明
 	// const props = defineProps(['username', 'avatar'])
 	// console.log(props)
 	const props = defineProps({
@@ -19,6 +19,7 @@
 			default:'../../static/logo.png'
 		}
 	})
+	console.log('子组件props',props)
 	
 </script>
 
