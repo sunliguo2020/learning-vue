@@ -1,0 +1,1 @@
+<view class="common-title data-v-04619778"><view class="name data-v-04619778"><slot name="name"></slot></view><view class="custom data-v-04619778"><slot name="custom"></slot></view></view>
