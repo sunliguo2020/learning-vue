@@ -1,0 +1,27 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "uni-app"
+			}
+		},
+		{
+			"path" : "pages/main/main",
+			"style" : 
+			{
+				"navigationBarTitleText" : "点餐系统",
+				"enablePullDownRefresh" : true,
+				"navigationStyle": "custom"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#E30019",
+		"backgroundColor": "#FFFFFF",
+		"onReachBottomDistance": 50
+	},
+	"uniIdRouter": {}
+}
