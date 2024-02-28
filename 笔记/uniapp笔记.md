@@ -153,7 +153,7 @@
 
 首先要从@dcloudio/uni-app中引入
 
-```vue
+```javascript
 import {onReachBottom } from "@dcloudio/uni-app"	
 ```
 
@@ -161,15 +161,15 @@ import {onReachBottom } from "@dcloudio/uni-app"
 
 ### 4.1.1 onReachBottom 触底加载更多
 
-```vue
+```javascript
 	import {onReachBottom } from "@dcloudio/uni-app"	
-onReachBottom(()=>{
-		queryParms.pageNum++;
-		if (noData.value){
-			return ;
-		}
-		getClassList();
-	})
+    onReachBottom(()=>{
+            queryParms.pageNum++;
+            if (noData.value){
+                return ;
+            }
+            getClassList();
+        })
 ```
 
 ### 4.1.2 onPullDownRefresh 下拉刷新
@@ -215,7 +215,7 @@ onPullDownRefresh(()=>{
 
 其参数为上一个页面传递的数据，参数类型为Object（用于页面传参）
 
-```vue
+```javascript
 import {onLoad,	} from "@dcloudio/uni-app";
 onLoad((e) => {
 		console.log(e);
@@ -232,6 +232,18 @@ onLoad((e) => {
 ```
 
 
+
+### 4.1.3 onShow监听页面显示
+
+```javascript
+<script setup>
+//该依赖已内置不需要单独安装
+import { onLoad, onShow } from "@dcloudio/uni-app";
+onShow(()=>{
+   console.log('onShow==')
+})
+</script>
+```
 
 
 
