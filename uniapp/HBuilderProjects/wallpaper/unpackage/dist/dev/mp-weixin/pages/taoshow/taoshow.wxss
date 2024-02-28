@@ -23,6 +23,10 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.swiper image.data-v-10faca1d {
+  width: 750rpx;
+  height: 100%;
+}
 .showpic.data-v-10faca1d {
   width: 750rpx;
 }
@@ -37,9 +41,6 @@ view .row .label.data-v-10faca1d {
   width: 400rpx;
   text-align: center;
   font-size: 30rpx;
-}
-view image.data-v-10faca1d {
-  width: 750rpx;
 }
 view text.data-v-10faca1d {
   color: #000;

@@ -6,8 +6,25 @@ const _sfc_main = {
   __name: "taoshow",
   setup(__props) {
     const taoShowObj = common_vendor.ref([]);
+    const swiperCurrent = common_vendor.ref(0);
+    common_vendor.onShow(() => {
+      common_vendor.index.getNetworkType({
+        success(res) {
+          console.log("获取网络类型为:", res);
+          common_vendor.index.showToast({
+            title: "网络类型" + res.networkType,
+            icon: "none"
+          });
+        },
+        fail: (err) => {
+          console.log("获取网络类型失败", err);
+        }
+      });
+    });
     const getTaoShowObj = async () => {
-      const res = await api_apis.apiTaoShow({ size: 10 });
+      const res = await api_apis.apiTaoShow({
+        size: 10
+      });
       taoShowObj.value = [...taoShowObj.value, ...res.data];
       console.log(taoShowObj.value);
     };
@@ -16,9 +33,32 @@ const _sfc_main = {
       console.log("触底了");
       getTaoShowObj();
     });
+    const swiperDone = function(e) {
+      console.log("切换一屏,动画完成", e);
+    };
+    const swiperChange = function(e) {
+      console.log("current改变了", e);
+      console.log("当前current值为", e.detail.current);
+      var buyer_reviews_images_count = taoShowObj.value.length;
+      console.log("当前数据量", buyer_reviews_images_count);
+      if (e.detail.current + 1 >= buyer_reviews_images_count) {
+        console.log("准备获取新数据");
+        getTaoShowObj();
+        swiperCurrent.value = buyer_reviews_images_count;
+      }
+    };
     return (_ctx, _cache) => {
       return {
         a: common_vendor.f(taoShowObj.value, (item, index, i0) => {
+          return {
+            a: item.url,
+            b: index
+          };
+        }),
+        b: swiperCurrent.value,
+        c: common_vendor.o(swiperDone),
+        d: common_vendor.o(swiperChange),
+        e: common_vendor.f(taoShowObj.value, (item, index, i0) => {
           return {
             a: item.url,
             b: common_vendor.t(item.shop),
