@@ -96,3 +96,13 @@ export function apiSearchData(data = {}) {
 		data
 	});
 };
+
+
+//买家秀
+export function apiTaoShow(data = {}) {
+	return request({
+		url: "https://tea.qingnian8.com/tools/taoShow",
+		method: 'GET',
+		data
+	});
+};

@@ -4,15 +4,20 @@ const BASE_URL = "https://tea.qingnian8.com/api/bizhi"
 export function request(config = {}) {
 	//resolve 成功  reject 失败
 	return new Promise((resolve, reject) => {
+		//解构参数
 		let {
 			url,
 			method = "GET",
 			header = {},
-			data = {}
+			data = {} //转换为string类型
 		} = config;
-
-		url = BASE_URL + url;
-		header['access-key'] = "xxm_sunliguo";
+		
+		//url不是http开头，则
+		if(!url.startsWith("https://") && !url.startsWith("http://")){
+			url = BASE_URL + url;
+		}
+		
+		header['access-key'] = "66541388";
 		console.log(header);
 
 		uni.request({
@@ -20,8 +25,9 @@ export function request(config = {}) {
 			data,
 			method,
 			header,
-			//成功后的回调
+			//请求成功后的回调函数
 			success: res => {
+				console.log('请求成功返回的res',res)
 				if (res.data.errCode == 0) {
 					resolve(res.data);
 				} else if (res.data.errCode === 400) {
@@ -39,14 +45,19 @@ export function request(config = {}) {
 					rejct(res.data.data);
 				}
 			},
-			//失败后的回调
+			//请求失败后的回调函数
 			fail: err => {
+				console.log('请求失败返回',err)
 				uni.showToast({
 					title:'请求失败',
 					showCancel:false,
 					icon:"error",
 				})
 				reject(err);
+			},
+			//接口调用结束的回调函数
+			complete:()=>{
+				console.log(url,"请求结束");
 			}
 		})
 	})

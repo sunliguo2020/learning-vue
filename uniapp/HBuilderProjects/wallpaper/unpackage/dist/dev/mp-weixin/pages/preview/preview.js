@@ -81,7 +81,6 @@ const _sfc_main = {
     };
     const submitScore = async () => {
       console.log(userScore.value);
-      console.log(userScore);
       let {
         classid,
         _id: wallId
@@ -100,7 +99,6 @@ const _sfc_main = {
         common_vendor.index.setStorageSync("storageClissList", picList.value);
         clickScoreClose();
       }
-      console.log(res);
     };
     const maskChange = () => {
       console.log(maskState);

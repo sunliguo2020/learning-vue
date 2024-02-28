@@ -1,0 +1,1 @@
+<view class="data-v-10faca1d"><view wx:for="{{a}}" wx:for-item="item" wx:key="d" class="data-v-10faca1d"><image src="{{item.a}}" mode="widthFix" class="showpic data-v-10faca1d"></image><view class="row data-v-10faca1d"><view class="label data-v-10faca1d">店铺：{{item.b}}</view><view class="label data-v-10faca1d">评论：{{item.c}}</view></view></view></view>

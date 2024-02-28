@@ -10,6 +10,7 @@ if (!Math) {
   "./pages/notice/notice.js";
   "./pages/notice/detail.js";
   "./pages/search/search.js";
+  "./pages/taoshow/taoshow.js";
 }
 const _sfc_main = {
   onLaunch: function() {

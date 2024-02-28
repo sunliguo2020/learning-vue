@@ -76,6 +76,13 @@ function apiSearchData(data = {}) {
     data
   });
 }
+function apiTaoShow(data = {}) {
+  return utils_request.request({
+    url: "https://tea.qingnian8.com/tools/taoShow",
+    method: "GET",
+    data
+  });
+}
 exports.apiGetBanner = apiGetBanner;
 exports.apiGetClassList = apiGetClassList;
 exports.apiGetClassify = apiGetClassify;
@@ -86,4 +93,5 @@ exports.apiGetRandomList = apiGetRandomList;
 exports.apiGetSetupScore = apiGetSetupScore;
 exports.apiGetUserInfo = apiGetUserInfo;
 exports.apiSearchData = apiSearchData;
+exports.apiTaoShow = apiTaoShow;
 exports.apiWriteDownload = apiWriteDownload;

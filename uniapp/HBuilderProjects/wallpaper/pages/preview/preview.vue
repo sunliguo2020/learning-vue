@@ -147,9 +147,11 @@
 	const currentInfo = ref(null);
 	const readImgs = ref([]);
 	const isScore = ref(false);
-	//获取缓存中的数据
+	
+	//从本地缓存中同步获取指定key对应的内容
 	const storageClissList = uni.getStorageSync("storageClissList");
-
+	
+	// 大图片列表
 	picList.value = storageClissList.map(item => {
 		return {
 			...item,
@@ -159,8 +161,7 @@
 	console.log("storageClissList", storageClissList);
 
 	onLoad((e) => {
-		// console.log('e.id',e.id);
-		// console.log('currentId',currentId.value);
+		
 		currentId.value = e.id;
 		//当前图片的 索引
 		currentIndex.value = picList.value.findIndex(item => item._id === currentId.value);
@@ -216,7 +217,6 @@
 	//确认评分
 	const submitScore = async () => {
 		console.log(userScore.value);
-		console.log(userScore);
 
 		let {
 			classid,
@@ -237,7 +237,6 @@
 			uni.setStorageSync("storageClissList", picList.value);
 			clickScoreClose();
 		}
-		console.log(res);
 	};
 	//遮罩层状态
 	const maskChange = () => {
