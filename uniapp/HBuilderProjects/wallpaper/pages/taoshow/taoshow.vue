@@ -1,13 +1,21 @@
 <template>
 	<view>
 		<view>轮播展示</view>
-		<swiper :current="swiperCurrent" class="swiper" @animationfinish="swiperDone" @change="swiperChange" autoplay>
-			<swiper-item v-for="(item,index) in taoShowObj" :key="index">
-				<image :src="item.url" mode="aspectFit"></image>
-			</swiper-item>
-		</swiper>
+		<view class="preview">
+			<swiper :current="swiperCurrent"
+			class="swiper"
+			indicator-dots
+			autoplay
+			@animationfinish="swiperDone" 
+			@change="swiperChange">
+				<swiper-item v-for="(item,index) in taoShowObj" :key="index">
+					<image :src="item.url" mode="aspectFit"></image>
+				</swiper-item>
+			</swiper>
+			
+		</view>
 	</view>
-	<view>
+<!-- 	<view>
 		<view>单页展示</view>
 		<view v-for="(item,index) in taoShowObj" :key="index">
 			<image :src="item.url" mode="widthFix" class='showpic'></image>
@@ -16,7 +24,7 @@
 				<view class="label">评论：{{item.comment}}</view>
 			</view>
 		</view>
-	</view>
+	</view> -->
 </template>
 
 <script setup>
@@ -28,9 +36,11 @@
 	} from "@/api/apis.js"
 	import {
 		onReachBottom,
-		onShow
+		onShow,
+		onLoad,
+		onShareAppMessage
 	} from "@dcloudio/uni-app"
-
+	
 	const taoShowObj = ref([])
 	const swiperCurrent = ref(0);
 	
@@ -54,10 +64,17 @@
 			size: 10
 		});
 		// console.log(res.data);
-		taoShowObj.value = [...taoShowObj.value, ...res.data];
+		// 追加新数据，保留原数据
+		// taoShowObj.value = [...taoShowObj.value, ...res.data];
+		// 只保留新数据
+		taoShowObj.value = res.data ;
 		console.log(taoShowObj.value)
-	}
-	getTaoShowObj();
+	};
+	onLoad((e)=>{
+		console.log('onLoad执行');
+		getTaoShowObj();
+	});
+	//上拉加载数据
 	onReachBottom(() => {
 		console.log('触底了');
 		getTaoShowObj()
@@ -65,11 +82,12 @@
 
 	//轮播切换一屏
 	const swiperDone = function(e) {
-		console.log('切换一屏,动画完成', e)
+		// console.log('切换一屏,动画完成', e)
 	}
-
+	
+	//current 更新
 	const swiperChange = function(e) {
-		console.log('current改变了', e);
+		// console.log('current改变了', e);
 		console.log('当前current值为', e.detail.current)
 		//当前买家秀图片数量
 		var buyer_reviews_images_count = taoShowObj.value.length
@@ -78,17 +96,33 @@
 		if (e.detail.current +1 >= buyer_reviews_images_count) {
 			console.log('准备获取新数据');
 			getTaoShowObj()
-			swiperCurrent.value = buyer_reviews_images_count;
+			// 如果追加数据，将current修改为最后一个。
+			// swiperCurrent.value = buyer_reviews_images_count;
 		}
 	}
+
+	//分享小程序
+	onShareAppMessage((res)=>{
+		console.log("onShareAppMessage",res);
+		if (res.from == 'menu'){
+			return {
+				'title':'买家秀',
+				path:'pages/taoshow/taoshow'
+			}
+		}
+	})
 </script>
 
 <style lang="scss" scoped>
+	.preview{
+		width:100%;
+		height:100vh;
+	}
 	.swiper {
-		
-
+		width:750rpx;
+		height:1000rpx;
 		image {
-			width: 750rpx;
+			width: 100%;
 			height: 100%
 		}
 	}

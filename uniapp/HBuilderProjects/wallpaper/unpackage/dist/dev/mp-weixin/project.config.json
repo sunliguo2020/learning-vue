@@ -1,5 +1,9 @@
 {
     "description": "项目配置文件。",
+    "packOptions": {
+        "ignore": [],
+        "include": []
+    },
     "setting": {
         "urlCheck": true,
         "es6": true,
@@ -7,11 +11,6 @@
         "minified": true,
         "newFeature": true,
         "bigPackageSizeSupport": true,
-        "coverView": false,
-        "enhance": false,
-        "showShadowRootInWxmlPanel": false,
-        "packNpmRelationList": [],
-        "ignoreUploadUnusedFiles": true,
         "babelSetting": {
             "ignore": [],
             "disablePlugins": [],
@@ -19,6 +18,9 @@
         }
     },
     "compileType": "miniprogram",
+    "libVersion": "3.3.4",
+    "appid": "wx24a3af9a60576c42",
+    "projectname": "mm咸虾米壁纸",
     "condition": {
         "search": {
             "current": -1,
@@ -40,11 +42,5 @@
     "editorSetting": {
         "tabIndent": "auto",
         "tabSize": 4
-    },
-    "libVersion": "3.3.4",
-    "packOptions": {
-        "ignore": [],
-        "include": []
-    },
-    "appid": "wx24a3af9a60576c42"
+    }
 }

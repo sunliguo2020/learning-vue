@@ -11,6 +11,7 @@ if (!Math) {
   "./pages/notice/detail.js";
   "./pages/search/search.js";
   "./pages/taoshow/taoshow.js";
+  "./pages/test/test.js";
 }
 const _sfc_main = {
   onLaunch: function() {

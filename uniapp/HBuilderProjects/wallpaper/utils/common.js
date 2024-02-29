@@ -17,7 +17,7 @@ export function compareTimestamp(timestamp) {
   }
 }
 
-
+//返回首页
 export function gotoHome(){
 	uni.showModal({
 		title:"提示",

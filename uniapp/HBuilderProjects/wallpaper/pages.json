@@ -64,6 +64,14 @@
 				"navigationBarTitleText": "买家秀",
 				"enablePullDownRefresh": true
 			}
+		},
+		{
+			"path" : "pages/test/test",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
 		}
 	],
 	"globalStyle": {
@@ -89,18 +97,18 @@
 				"iconPath": "./static/tabBar/classify.png"
 			},
 			{
+				"text": "买家秀",
+				"pagePath": "pages/taoshow/taoshow",
+				"selectedIconPath": "./static/tabBar/show-h.png",
+				"iconPath": "./static/tabBar/show.png"
+			},
+			{
 				"text": "我的",
 				"pagePath": "pages/user/user",
 				"selectedIconPath": "./static/tabBar/user-h.png",
 				"iconPath": "./static/tabBar/user.png"
 
-			},
-			{
-				"text": "买家秀",
-				"pagePath": "pages/taoshow/taoshow",
-				"selectedIconPath": "./static/tabBar/show-h.png",
-				"iconPath": "./static/tabBar/show.png"
-			}
+			}		
 		]
 	}
 }

@@ -22,13 +22,13 @@
 <script setup>
 	import {ref} from "vue";
 	import {getStatusBarHeight,getTitleBarHeight,getNavBarHeight} from "@/utils/system.js";
-	
-	defineProps({
+	//Props生命
+	const props = defineProps({
 		title:{
 			type:String,
 			default:"壁纸"
 		}
-	})
+	});
 
 </script>
 

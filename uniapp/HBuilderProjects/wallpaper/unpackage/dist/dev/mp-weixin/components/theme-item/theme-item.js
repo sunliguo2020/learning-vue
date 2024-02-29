@@ -19,7 +19,10 @@ const _sfc_main = {
     },
     item: {
       type: Object,
-      default() {
+      // 对象或数组的默认值
+      // 必须从一个工厂函数返回。
+      // 该函数接收组件所接收到的原始 prop 作为参数。
+      default(rawProps) {
         return {
           picurl: "../../common/images/more.jpg",
           name: "默认名称",
