@@ -205,9 +205,72 @@ import {ref,defineExpose} from "vue"
 
 # 6、组件通信
 
-## 6.1 
+## 6.1 Props
 
 概述：props是使用频率最高的一种通信方式，常用于：父->子
 
 - 若父传子：属性值是非函数
 - 若子传父：属性值是函数
+
+在使用 `<script setup>` 的单文件组件中，props 可以使用 **`defineProps()` 宏**来声明：
+
+```vue
+<script setup>
+const props = defineProps(['foo'])
+
+console.log(props.foo)
+</script>
+```
+
+除了使用字符串数组来声明 prop 外，还可以使用对象的形式：
+
+```javascript
+// 使用 <script setup>
+defineProps({
+  title: String,
+  likes: Number
+})
+```
+
+带校验
+
+```vue
+<script setup>
+	defineProps({
+		isMore: {
+			type: Boolean,
+			default: false
+		},
+		item: {
+			type: Object,
+               // 对象或数组的默认值
+    // 必须从一个工厂函数返回。
+    // 该函数接收组件所接收到的原始 prop 作为参数。
+			default () {
+				return {
+					picurl: '../../common/images/more.jpg',
+					name: '默认名称',
+					updateTime: Date.now()
+				}
+			}
+		}
+	});
+</script>
+```
+
+类型为数组和对象的时候，需要写成函数类型。
+
+## 6.2 事件
+
+在组件的模板表达式中，可以直接使用 `$emit` 方法触发自定义事件 (例如：在 `v-on` 的处理函数中)：
+
+```vue
+<!-- MyComponent -->
+<button @click="$emit('someEvent')">click me</button>
+```
+
+父组件可以通过 `v-on` (缩写为 `@`) 来监听事件：
+
+```vue
+<MyComponent @some-event="callback" />
+```
