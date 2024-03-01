@@ -26,35 +26,13 @@
 .preview.data-v-10faca1d {
   width: 100%;
   height: 100vh;
+  position: relative;
 }
-.swiper.data-v-10faca1d {
-  width: 750rpx;
-  height: 1000rpx;
-}
-.swiper image.data-v-10faca1d {
+.preview swiper.data-v-10faca1d {
   width: 100%;
   height: 100%;
 }
-.showpic.data-v-10faca1d {
-  width: 750rpx;
-}
-view .row.data-v-10faca1d {
-  display: flex;
-  padding: 10rpx 0;
-  font-size: 32rpx;
-  line-height: 1.7em;
-}
-view .row .label.data-v-10faca1d {
-  color: pink;
-  width: 400rpx;
-  text-align: center;
-  font-size: 30rpx;
-}
-view text.data-v-10faca1d {
-  color: #000;
-  padding-left: 10rpx;
-  width: 80rpx;
-  line-height: 1em;
-  text-align: center;
-  font-size: 28rpx;
+.preview swiper image.data-v-10faca1d {
+  width: 100%;
+  height: 100%;
 }

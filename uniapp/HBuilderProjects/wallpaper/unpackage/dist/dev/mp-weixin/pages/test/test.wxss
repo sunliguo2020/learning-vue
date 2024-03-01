@@ -23,6 +23,15 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-input.data-v-727d09f0 {
-  border: 1px solid blue;
+.preview.data-v-727d09f0 {
+  width: 100%;
+  height: 100vh;
+}
+.preview swiper.data-v-727d09f0 {
+  width: 100%;
+  height: 100%;
+}
+.preview swiper image.data-v-727d09f0 {
+  width: 100%;
+  height: 100%;
 }

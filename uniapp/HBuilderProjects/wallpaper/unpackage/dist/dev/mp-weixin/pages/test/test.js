@@ -1,18 +1,16 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const common_assets = require("../../common/assets.js");
 const _sfc_main = {
   __name: "test",
   setup(__props) {
     common_vendor.ref(0);
-    const formSubmit = function(e) {
-      console.log("form发生了submit事件，携带数据为：" + JSON.stringify(e.detail.value));
-      console.log(e.detail.value);
-      console.log(+e.detail.value.age);
-    };
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.o(formSubmit),
-        b: common_vendor.o((...args) => _ctx.formReset && _ctx.formReset(...args))
+        a: common_vendor.f(5, (item, k0, i0) => {
+          return {};
+        }),
+        b: common_assets._imports_0
       };
     };
   }

@@ -1,49 +1,11 @@
 <template>
-
-	<view>
-		<view>
-			<form @submit="formSubmit" @reset="formReset">
-				<view class="uni-form-item uni-column">
-					<view class="title">switch</view>
-					<view>
-						<switch name="switch" />
-					</view>
-				</view>
-				<view class="uni-form-item uni-column">
-					<view class="title">radio</view>
-					<radio-group name="radio">
-						<label>
-							<radio value="radio1" /><text>选项一</text>
-						</label>
-						<label>
-							<radio value="radio2" /><text>选项二</text>
-						</label>
-					</radio-group>
-				</view>
-				<view class="uni-form-item uni-column">
-					<view class="title">checkbox</view>
-					<checkbox-group name="checkbox">
-						<label>
-							<checkbox value="checkbox1" /><text>选项一</text>
-						</label>
-						<label>
-							<checkbox value="checkbox2" /><text>选项二</text>
-						</label>
-					</checkbox-group>
-				</view>
-			
-				<view class="uni-form-item uni-column">
-					<view class="title">input</view>
-					<input class="uni-input"  type="number" name="age" placeholder="这是一个输入框" />
-				</view>
-				<view class="uni-btn-v">
-					<button form-type="submit">Submit</button>
-					<button type="default" form-type="reset">Reset</button>
-				</view>
-			</form>
-		</view>
+	<view class="preview">
+		<swiper>
+			<swiper-item v-for="item in 5">
+				<image src="@/common/images/preview1.jpg" mode="aspectFit"></image>
+			</swiper-item>
+		</swiper>
 	</view>
-
 </template>
 
 <script setup>
@@ -64,7 +26,16 @@
 </script>
 
 <style lang="scss" scoped>
-	input {
-		border: 1px solid blue;
+.preview{
+	width:100%;
+	height:100vh;
+	swiper{
+		width:100%;
+		height:100%;
+		image{
+			width:100%;
+			height:100%
+		}
 	}
+}
 </style>
