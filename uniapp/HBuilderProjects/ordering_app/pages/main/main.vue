@@ -1,11 +1,125 @@
 <template>
-	<view>
-		
+	<view class="page">
+		<view class="status_bar bg_color"></view>
+		<view class="header">
+			<view :class="{'search-header':true,'ipx':false}"></view>
+			<view class="search-wrap">
+				<view class="icon"></view>
+				<view class="search">输入商家名或菜品</view>
+			</view>
+		</view>
+		<view :class="{'shop-main':true,ipx:false}">
+			<view class="shop-list">
+				<view class="image">
+
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
-<script setup>
-
+<script>
+	import {mapState,mapActions} from "vuex";
+	export default {
+		data() {
+			return {
+				isShow:false
+			}
+		},
+		onLoad() {
+			this.lng=0;//经度
+			this.lat=0;//纬度
+			this.maxPage=0;//总页数
+			this.curPage=1;//当前页码
+		},
+		onShow(){
+			uni.getSetting({
+				success:(res)=> {
+					//用户没有开启地位位置
+					if(!res.authSetting['scope.userLocation']){
+						uni.showModal({
+							title: '开启获取地理位置',
+							content: '请打开"位置信息"权限，找到附近的店铺',
+							success: (res)=> {
+								if (res.confirm) {
+									//调起客户端小程序设置界面
+									uni.openSetting({
+										success:(res2)=> {
+											//如果用户打开了地理位置
+											if(res2.authSetting['scope.userLocation']){
+												uni.getLocation({
+													type: 'gcj02',
+													success:  (res)=> {
+														this.lng=res.longitude;
+														this.lat=res.latitude;
+														this.getShop({page:1,lng:this.lng,lat:this.lat,success:(pageNum)=>{
+																this.maxPage=pageNum;
+															}
+														});
+													}
+												});
+											}
+										}
+									});
+								}
+							}
+						});
+					}
+				}
+			})
+			uni.getLocation({
+				type: 'gcj02',
+				success:  (res)=> {
+					this.lng=res.longitude;
+					this.lat=res.latitude;
+					this.getShop({page:1,lng:this.lng,lat:this.lat,success:(pageNum)=>{
+							this.maxPage=pageNum;
+						}
+					});
+				}
+			});
+		},
+		methods: {
+			...mapActions({
+				getShop:"business/getShop",
+				getShopPage:"business/getShopPage"
+			}),
+			goPage(url){
+				uni.redirectTo({
+					url
+				})
+			}
+		},
+		computed:{
+			...mapState({
+				isIpx:state=>state.system.isIpx,
+				shops:state=>state.business.shops
+			})
+		},
+		//分享小程序
+		onShareAppMessage(res) {
+			return {
+				title: '点餐小程序',
+				path: '/pages/main/main'
+			}
+		},
+		//下拉刷新
+		onPullDownRefresh() {
+			this.curPage=1;
+			this.getShop({page:this.curPage,lng:this.lng,lat:this.lat,complete:()=>{
+					uni.stopPullDownRefresh();
+				}
+			});
+		},
+		//上拉加载数据
+		onReachBottom(){
+			if(this.curPage<this.maxPage) {
+				this.curPage++;
+				this.getShopPage({page:this.curPage,lng:this.lng,lat:this.lat});
+			}
+		},
+	
+	}
 </script>
 
 <style scoped>
