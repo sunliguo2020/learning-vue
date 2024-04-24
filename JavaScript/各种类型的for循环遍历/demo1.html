@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arrs = [...Array(9999999).keys()];
+        let total = 0;
+        let startTime = Date.now();
+        // for (let i=0;i<arrs.length;i++){
+        //     total +=i;
+        // }
+        arrs.forEach(item=>{
+            if (item == 10)
+                return;
+            total +=item;
+        })
+        let endTime = Date.now()
+        let countTime = endTime -startTime;
+
+        console.log('计数---->',total);
+        console.log('消耗时间----->',countTime)
+
+    </script>
+</body>
+</html>

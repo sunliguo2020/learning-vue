@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr1 = [1,2,3]
+
+        let newArr = []
+        arr1.forEach((item,index,arr)=>{
+            newArr.push(item*2);
+            // console.log(item,index,arr)
+        })
+        console.log(newArr)
+
+        arr1.map(item=>{
+            newArr.push(item*2);
+        })
+        console.log(newArr)
+
+        let arrs = arr1.map(item=>item*2)
+        console.log(arrs)
+    </script>
+</body>
+</html>
